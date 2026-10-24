@@ -1,0 +1,4 @@
+# GPU版PyTorch请按本机CUDA条件单独安装；已验证版本为2.6.0+cu124。
+torch>=2.6,<3
+opencv-python>=4.8,<5
+matplotlib>=3.7,<4

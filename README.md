@@ -1,163 +1,122 @@
-# Hier-AI-Video-Transmis (层级 AI 视频传输)
+# PING-III 层次化AI视频传输
 
 面向动态网络的语义视频AI层次化编解码与丢包鲁棒自适应传输研究。
 
-本项目研究在有限发送预算及网络丢包条件下，如何通过学习式视频表示、压缩、独立分包、网络自适应和缺失恢复，实现可用的视频重建。
+当前交付是**轻量、逐帧CNN无丢失基线**和独立的**特征域分组擦除模块**，用于学习、接口联调和机制验证。完整分层、语义压缩链、真实分包、恢复网络与网络自适应尚未在本仓库闭环；不代表GRACE或MSTVSC完整复现。
 
-当前处于基础模块实现与接口联调阶段，尚未完成完整视频传输系统。
+## 目标与分工
 
-## 项目目标
+阶段目标为720P、24fps源视频、约1Mbps实际总发送码率、10%丢包和LPIPS-AlexNet < 0.6。以上均待验证；源帧率与实际处理速度分别报告，码率需声明包头、元信息、保护及反馈的统计范围。
 
-第一阶段拟验证以下条件下的系统表现：
-
-| 项目 | 待验证目标 |
+|成员|当前分工|
 |---|---|
-| 输入视频 | 720P、24fps |
-| 实际总发送码率 | 约1Mbps，计入约定统计范围内的包头、元信息与保护开销 |
-| 丢包率 | 10% |
-| 重建质量 | LPIPS-AlexNet < 0.6 |
+|杨哲|轻量语义编解码主干；缺失掩码、丢包训练、恢复和鲁棒性评测|
+|毕然|公共/个体分解、下采样、量化、压缩逆变换、分包和交织；RDO|
+|蒋立果|信道、轨迹、预算、期限、反馈与网络自适应；分层接口由团队进一步确认|
 
-以上均为待验证目标，不代表当前系统已经达到。源视频帧率与实际编码、解码处理速度分别统计。
+分层表示的生成与层次发送选择需另行约定。公共/个体分解不自动等于基础/增强层，当前模型没有可选传输层或帧间预测。
 
-## 系统流程
+## 目录
 
 ```text
-视频输入
-   ↓
-语义编码主干
-   ↓
-公共/个体特征分解与压缩
-   ↓
-量化 → 交织与独立分包
-   ↓
-发送控制与丢包网络
-   ↓
-解包、反交织与反量化
-   ↓
-缺失掩码与特征恢复
-   ↓
-压缩逆变换与语义解码
-   ↓
-重建视频与统一评测
+hier_video/
+  models/semantic_encoder.py    # PatchEmbedding、降采样、GOPEncoder
+  models/semantic_decoder.py    # 上采样、GOPDecoder
+  data/video.py                # 指定起始帧、中心裁剪、RGB与BTCHW组装
+  transmission/packet_loss.py  # 特征分组独立擦除
+  checkpoint.py               # 保存与加载模型，不依赖检查程序
+  experiments/
+    train_single_gop.py        # 固定GOP过拟合检查，显式命令启动
+    evaluate.py                # 只加载权重，保存CSV和重建图
+checks/
+  check_packet_loss.py         # CPU/CUDA丢失、掩码与输入不变检查
+  check_model_components.py    # 各层形状、逐帧对应与梯度检查
+  check_autoencoder.py         # 联合梯度、更新、尺寸及检查点往返
+packet_loss/                  # 旧包导入兼容层，不维护重复实现
+context                       # 周成果、结果边界及待对接事项
+requirements.txt
 ```
 
-网络控制模块依据反馈调整约定范围内的发送策略。
+本地`data/`、`outputs/`、视频、权重及特征样例默认不提交。原D盘学习文件不受此次重构影响，原`video_feature_demo.py`的职责已拆为数据、训练、评测和检查点模块。
 
-上述流程是计划架构。恢复位置、特征布局及具体接口随共同实现确认，并进行版本记录。
+## 环境
 
-公共/个体特征分解不自动等同于基础层/增强层。分层能力需要通过基础层独立重建等实验验证。
-
-## 当前已实现并验证
-
-目前已上传两个基础模块：
-
-- 特征域分组擦除函数。
-- 对应的CPU/GPU检查程序。
-
-当前擦除流程为：
-
-```text
-输入特征 → 展平 → 固定元素数分组
-         → 各组独立随机丢失
-         → 缺失置零并返回掩码
-```
-
-该功能用于本地调试及后续训练机制验证，尚不是包含字节序列化、包头、带宽、迟到和反馈的真实传输模块。
-
-### 丢包函数接口
-
-```python
-received, mask, drop_packet = simulate_packet_loss(
-    features,
-    p,
-    packet_size
-)
-```
-
-| 参数 | 含义 |
-|---|---|
-| `features` | 输入特征张量 |
-| `p` | 每个模拟包独立丢失的概率，范围为 `[0, 1]` |
-| `packet_size` | 每个模拟包包含的特征元素数，单位为元素，不是字节 |
-
-| 返回值 | 含义 |
-|---|---|
-| `received` | 缺失位置置零后的特征，形状与输入相同 |
-| `mask` | 元素级布尔掩码，`True`表示缺失 |
-| `drop_packet` | 包级布尔记录，`True`表示对应分组丢失 |
-
-### 当前限制
-
-- 整个输入统一展平分组，尚未实现逐样本、逐GOP独立分包。
-- 特征元素总数必须能被 `packet_size` 整除。
-- 每个模拟包以概率 `p` 独立丢失，实际丢失比例不保证恰好等于 `p`。
-- 尚未提供轨迹文件保存、重放及突发丢包模拟。
-- 尚未对接真实量化符号、包映射及网络事件记录。
-
-### 已通过的检查
-
-CPU与CUDA设备上均已通过以下情况的检查：
-
-- `p=0`：全部收到，输出与输入一致。
-- `p=1`：全部缺失，输出为零。
-- 随机丢失：缺失位置为零，收到位置保持原值。
-- 包内全部元素具有一致的缺失状态。
-- 输出形状、掩码类型及所在设备符合约定。
-- 函数不会修改原始输入。
-
-这些检查验证了当前模块的基础行为，不代表端到端传输性能已经得到验证。
-
-## 环境与运行
-
-### 当前验证环境
-
-- Python：使用Conda环境。
-- PyTorch：`2.6.0+cu124`。
-- GPU：NVIDIA GeForce RTX 4060 Laptop GPU，约8GB显存。
-
-以上为开发验证环境，不构成最低硬件要求。丢包模块可在CPU上运行，GPU检查需要CUDA可用。
-
-### 检查PyTorch环境
+已验证环境：Conda、PyTorch 2.6.0+cu124、RTX 4060 Laptop GPU（约8GB）。CPU也可运行基础检查。GPU版PyTorch请根据本机环境安装，保留已有可用环境即可。
 
 ```bash
+python -m pip install -r requirements.txt
 python -c "import torch; print(torch.__version__); print(torch.cuda.is_available())"
 ```
 
-### 运行丢包模块检查
+以下命令均在仓库根目录、已激活的Python环境执行。
 
-如果两个文件位于仓库根目录：
+## 基础检查
 
 ```bash
-python check_packet_loss.py
+python -m checks.check_packet_loss
+python -m checks.check_model_components
+python -m checks.check_autoencoder
 ```
 
-如果位于子目录，请进入对应目录后运行，或按实际包结构调整导入方式。
+丢包与联合编解码检查会在CPU运行，CUDA可用时再检查GPU。组件检查不代表系统性能达标。旧包入口可使用`python -m packet_loss.check_packet_loss`；不要进入子目录直接运行旧文件。
 
-预期输出包含：
+## 训练和评测
 
-```text
-设备=cpu，p=0检查通过
-设备=cpu，p=1检查通过
-设备=cpu，随机丢包检查通过
+准备一段可用于实验的视频，裁剪尺寸需为正且能被4整除。训练只使用指定GOP，是流程检查，不是多视频训练。
+
+```bash
+python -m hier_video.experiments.train_single_gop --video data/sample.mp4 --checkpoint outputs/single_gop_v1.pt --steps 5000 --start-frame 0 --crop-size 128
 ```
 
-CUDA可用时，还应包含：
+默认种子24，学习率0.001，4帧GOP、24特征通道、MSE损失。检查点已存在时拒绝覆盖，请选择新文件名。可用`--device cpu`或`--device cuda`选择设备。
 
-```text
-设备=cuda，p=0检查通过
-设备=cuda，p=1检查通过
-设备=cuda，随机丢包检查通过
+```bash
+python -m hier_video.experiments.evaluate --video data/sample.mp4 --checkpoint outputs/single_gop_v1.pt --start-frames 0 100 --output-dir outputs/evaluation
 ```
 
-检查通过后，即可在其他模块中导入 `simulate_packet_loss`。
+评测不训练、不覆盖权重，输出`metrics.csv`及每个片段的原图/重建对比PNG，不需要弹窗。视频需足够长；帧号从0开始。使用自己的旧权重时，替换`--checkpoint`路径。默认不分发原训练视频和权重，不能保证换视频复现相同数值。
 
-## 方法参考与结果边界
+新检查点记录训练配置、种子、模型权重及损失；未保存优化器状态，因此不是完整断点续训。旧权重参数名保持兼容。
 
-本项目参考以下工作：
+## 编解码接口
 
-- **GRACE: Loss-Resilient Real-Time Video through Neural Codecs**：鲁棒训练、独立分包及帧间状态同步。
-- **Conquering High Packet-Loss Erasure: MoE Swin Transformer-Based Video Semantic Communication**：语义视频表示、特征分解、交织与缺失恢复。
+```python
+from hier_video.models.semantic_encoder import GOPEncoder
+from hier_video.models.semantic_decoder import GOPDecoder
 
-当前工作属于参考论文方法开展的自主实现与机制验证，不代表已完成官方代码复现或完整论文复现。
+encoder = GOPEncoder(embed_dim=24)
+decoder = GOPDecoder(feature_channels=24)
+features = encoder(gop)
+reconstructed = decoder(features)
+```
 
-后续实验将分别说明采用的方法、修改内容、数据与配置差异，以及结果的适用范围。
+|对象|格式|说明|
+|---|---|---|
+|输入视频|`[B,T,3,H,W]` float32|RGB、[0,1]；H/W能被4整除|
+|编码特征|`[B,T,24,H/4,W/4]` float32|可为负值，尚未量化|
+|重建视频|`[B,T,3,H,W]` float32|Sigmoid输出[0,1]|
+
+当前各帧共享参数但独立计算，无帧间或跨GOP依赖，没有`layer_id`、真实包大小或码率档位。模型与输入需处于同一设备；训练直接调用`encoder(gop)`，不要调用使用`no_grad()`的`encode_gop_for_inference()`。
+
+## 丢包模块接口
+
+```python
+from hier_video.transmission.packet_loss import simulate_packet_loss
+received, mask, dropped = simulate_packet_loss(features, p=0.1, packet_size=16)
+```
+
+`packet_size`单位为**元素**，不是字节；整个张量统一展平，因此当前可能跨样本/GOP分组。元素总数必须整除包大小。`mask`与特征同形状、bool、True=缺失；`dropped`为一维包级记录。每组独立采样，实际丢失比例不保证等于p。
+
+尚无量化、包头、轨迹持久化、突发丢失或迟到处理，也未与编解码训练入口联接。未来由毕然提供映射、蒋立果提供包事件，杨哲据此构造掩码，避免重复随机丢包。
+
+## 已有结果与边界
+
+杨哲报告的同一视频128×128中心裁剪实验：仅在帧0～3训练5000步，最后训练日志MSE约0.000165；加载后帧0～3为0.000167、帧100～103为0.000519，加载前后输出最大差值0。
+
+这些是原学习流程的实验记录，不是本次重构重新训练所得。当前使用单视频、无量化、无丢包，不证明独立视频泛化、LPIPS、720P、1Mbps或分层能力。详细文字记录见[context](context)。
+
+## 后续协作
+
+先确认特征布局、版本、分组边界与恢复位置；每周提交代码、配置、固定样例、运行命令和检查结果。先回归已验证版本，再单项替换新模块。团队接口融合仍待确认，个人代码完成不等于整周联合验收完成。
+
+方法参考：GRACE（鲁棒训练与独立分包）及MSTVSC（语义表示、交织与恢复）。论文借鉴、部分机制实现与完整复现分别报告。

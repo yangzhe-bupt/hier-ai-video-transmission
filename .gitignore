@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+.env
+.vscode/
+.idea/
+outputs/
+data/
+*.pt
+*.pth
+*.mp4
+*.avi
+*.mov
+*.mkv
