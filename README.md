@@ -18,7 +18,6 @@
 
 ```text
 practice/
-  basics/          # 早期ANN/CNN学习脚本
   data/            # GOP索引及视频Dataset
   models/          # CNN及Swin编码器、CNN解码器
     swin/          # 窗口注意力、位置偏置、移位掩码、块对
@@ -28,14 +27,14 @@ practice/
 Biran/feature_decomposition.py # 当前联调依赖
 hier_video/        # 第一周整理的基线包，仍保留
 checks/            # 第一周基础检查
-results/week2/     # 固定样例、历史指标与代码快照清单
+results/week2/     # 固定样例与历史指标
 docs/datasets/     # 视频来源说明
 context            # 各周成果与证据边界
 ```
 
 ## 环境与运行
 
-已使用Conda、PyTorch 2.6.0+cu124、RTX4060 Laptop GPU约8GB。保留可用GPU环境；基础依赖见requirements.txt。basics中的旧练习另需pandas、scikit-learn、torchvision、torchinfo等，不是当前视频主线依赖。
+已使用Conda、PyTorch 2.6.0+cu124、RTX4060 Laptop GPU约8GB。保留可用GPU环境；基础依赖见requirements.txt。
 
 在仓库根目录运行：
 

@@ -1,8 +1,7 @@
 # practice目录说明
 
-现有18个练习源码已分组；原文件仅修订头部说明，代码Token与AST均保持一致。
+视频实验源码按功能分组；早期ANN和CIFAR10学习练习仅保留于作者本地，不纳入仓库。
 
-- basics：早期ANN、CNN学习练习。
 - data：帧数统计、GOP索引、单视频和目录数据集。
 - models：现有CNN编码器、解码器。
 - models/swin：窗口注意力、窗口块、移位窗口和Swin块对。
