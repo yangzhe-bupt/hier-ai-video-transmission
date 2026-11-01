@@ -1,0 +1,4 @@
+﻿start_frame,cnn_mse,swin_mse,image_path
+100,0.0008630304364487529,0.0010095671750605106,D:\learn\pytorch\outputs\cnn_swin_comparison\compare_frame100.png
+400,0.005861529149115086,0.0012063592439517379,D:\learn\pytorch\outputs\cnn_swin_comparison\compare_frame400.png
+800,0.0034282049164175987,0.004912772215902805,D:\learn\pytorch\outputs\cnn_swin_comparison\compare_frame800.png

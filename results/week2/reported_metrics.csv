@@ -1,0 +1,9 @@
+experiment,frames,mse,source
+cnn_5epochs_best,full_validation,0.010229,user_report
+swin_5epochs_best,full_validation,0.009117,user_report
+biran_baseline,0-3,0.00016715,user_report
+biran_factor1,0-3,0.00016715,user_report
+biran_factor2,0-3,0.00102360,user_report
+biran_baseline,100-103,0.00051855,user_report
+biran_factor1,100-103,0.00051855,user_report
+biran_factor2,100-103,0.00119676,user_report

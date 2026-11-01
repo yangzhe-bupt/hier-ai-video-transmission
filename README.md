@@ -2,121 +2,77 @@
 
 面向动态网络的语义视频AI层次化编解码与丢包鲁棒自适应传输研究。
 
-当前交付是**轻量、逐帧CNN无丢失基线**和独立的**特征域分组擦除模块**，用于学习、接口联调和机制验证。完整分层、语义压缩链、真实分包、恢复网络与网络自适应尚未在本仓库闭环；不代表GRACE或MSTVSC完整复现。
+## 当前进度（杨哲，第二周，2026-11-01）
 
-## 目标与分工
+已完成轻量CNN基线、二维Swin编码器与CNN解码器训练、最佳权重保存加载，以及毕然公共/个体特征模块的无丢包联调。尚未形成完整语义传输系统，也不代表GRACE或MSTVSC完整复现。
 
-阶段目标为720P、24fps源视频、约1Mbps实际总发送码率、10%丢包和LPIPS-AlexNet < 0.6。以上均待验证；源帧率与实际处理速度分别报告，码率需声明包头、元信息、保护及反馈的统计范围。
+阶段目标：720P@24fps源视频、约1Mbps实际总发送码率、10%丢包、LPIPS<0.6，均待验证。当前实验为128×128中心裁剪、4帧GOP、浮点特征、MSE训练。
 
-|成员|当前分工|
+|成员|方向|
 |---|---|
-|杨哲|轻量语义编解码主干；缺失掩码、丢包训练、恢复和鲁棒性评测|
-|毕然|公共/个体分解、下采样、量化、压缩逆变换、分包和交织；RDO|
-|蒋立果|信道、轨迹、预算、期限、反馈与网络自适应；分层接口由团队进一步确认|
-
-分层表示的生成与层次发送选择需另行约定。公共/个体分解不自动等于基础/增强层，当前模型没有可选传输层或帧间预测。
+|杨哲|语义编解码主干、丢包模拟、缺失恢复和鲁棒性实验|
+|毕然|特征分解、压缩、量化、分包与交织|
+|蒋立果|网络条件、预算、期限、反馈与自适应；分层接口需共同确认|
 
 ## 目录
 
 ```text
-hier_video/
-  models/semantic_encoder.py    # PatchEmbedding、降采样、GOPEncoder
-  models/semantic_decoder.py    # 上采样、GOPDecoder
-  data/video.py                # 指定起始帧、中心裁剪、RGB与BTCHW组装
-  transmission/packet_loss.py  # 特征分组独立擦除
-  checkpoint.py               # 保存与加载模型，不依赖检查程序
-  experiments/
-    train_single_gop.py        # 固定GOP过拟合检查，显式命令启动
-    evaluate.py                # 只加载权重，保存CSV和重建图
-checks/
-  check_packet_loss.py         # CPU/CUDA丢失、掩码与输入不变检查
-  check_model_components.py    # 各层形状、逐帧对应与梯度检查
-  check_autoencoder.py         # 联合梯度、更新、尺寸及检查点往返
-packet_loss/                  # 旧包导入兼容层，不维护重复实现
-context                       # 周成果、结果边界及待对接事项
-requirements.txt
+practice/
+  basics/          # 早期ANN/CNN学习脚本
+  data/            # GOP索引及视频Dataset
+  models/          # CNN及Swin编码器、CNN解码器
+    swin/          # 窗口注意力、位置偏置、移位掩码、块对
+  experiments/     # 训练、验证和图像对比
+  checks/          # 编解码器与毕然模块联调
+  run.py           # 兼容原导入和__file__项目定位
+Biran/feature_decomposition.py # 当前联调依赖
+hier_video/        # 第一周整理的基线包，仍保留
+checks/            # 第一周基础检查
+results/week2/     # 固定样例、历史指标与代码快照清单
+docs/datasets/     # 视频来源说明
+context            # 各周成果与证据边界
 ```
 
-本地`data/`、`outputs/`、视频、权重及特征样例默认不提交。原D盘学习文件不受此次重构影响，原`video_feature_demo.py`的职责已拆为数据、训练、评测和检查点模块。
+## 环境与运行
 
-## 环境
+已使用Conda、PyTorch 2.6.0+cu124、RTX4060 Laptop GPU约8GB。保留可用GPU环境；基础依赖见requirements.txt。basics中的旧练习另需pandas、scikit-learn、torchvision、torchinfo等，不是当前视频主线依赖。
 
-已验证环境：Conda、PyTorch 2.6.0+cu124、RTX 4060 Laptop GPU（约8GB）。CPU也可运行基础检查。GPU版PyTorch请根据本机环境安装，保留已有可用环境即可。
+在仓库根目录运行：
 
-```bash
-python -m pip install -r requirements.txt
-python -c "import torch; print(torch.__version__); print(torch.cuda.is_available())"
+```powershell
+python practice/run.py --list
+python practice/run.py models/swin/swin_block_pair.py
+python practice/run.py models/swin_encoder.py
+python practice/run.py checks/check_biran_integration.py
 ```
 
-以下命令均在仓库根目录、已激活的Python环境执行。
+请通过run.py运行分类后的脚本，不直接运行子目录文件。主线训练数据放在仓库根目录下的data/videos/train和data/videos/val，测试目录单独保留。模型输出到outputs。训练和验证目前各一个来源视频，不代表丰富的多视频训练集。
 
-## 基础检查
-
-```bash
-python -m checks.check_packet_loss
-python -m checks.check_model_components
-python -m checks.check_autoencoder
+```powershell
+python practice/run.py experiments/train_swin_video.py
 ```
 
-丢包与联合编解码检查会在CPU运行，CUDA可用时再检查GPU。组件检查不代表系统性能达标。旧包入口可使用`python -m packet_loss.check_packet_loss`；不要进入子目录直接运行旧文件。
+当前Swin训练最多500轮；连续30轮未改善超过1e-5时早停。新实验输出到outputs/swin_runs/时间戳目录：best.pt用于评测，latest.pt保存完整轮边界续训状态，history.csv记录逐轮MSE。设置脚本中的resume_run_dir可恢复下一轮；中断轮需要重做。数据、模型配置及运行环境应保持一致。
 
-## 训练和评测
+早期单GOP、CNN训练和部分联调脚本仍包含原作者D盘路径，使用前需在自己的副本调整。compare_cnn_swin.py默认读取此前独立的五轮基线文件名；若使用新实验best.pt，需调整其检查点路径。权重和原始视频未纳入Git，缺少权重时不能直接运行重建评测。Swin权重必须由load_swin_models加载，CNN的load_models不能加载它。
 
-准备一段可用于实验的视频，裁剪尺寸需为正且能被4整除。训练只使用指定GOP，是流程检查，不是多视频训练。
+## 第二周实验记录
 
-```bash
-python -m hier_video.experiments.train_single_gop --video data/sample.mp4 --checkpoint outputs/single_gop_v1.pt --steps 5000 --start-frame 0 --crop-size 128
-```
+以下全验证指标来自杨哲已完成的五轮运行反馈，本次发布未重训：
 
-默认种子24，学习率0.001，4帧GOP、24特征通道、MSE损失。检查点已存在时拒绝覆盖，请选择新文件名。可用`--device cpu`或`--device cuda`选择设备。
+|配置|最佳验证MSE|
+|---|---:|
+|CNN编码器＋CNN解码器|0.010229|
+|Swin编码器＋CNN解码器|0.009117|
 
-```bash
-python -m hier_video.experiments.evaluate --video data/sample.mp4 --checkpoint outputs/single_gop_v1.pt --start-frames 0 100 --output-dir outputs/evaluation
-```
+Swin在该单次实验中平均MSE较低，但两侧模型容量不同，且部分片段退化；不代表稳定的感知质量或语义收益。对照图显示两者仍有模糊、偏色。三个固定片段指标和图片见[results/week2](results/week2)。其中比较CSV的image_path为原运行机器的历史路径，对应图片也已放在同一结果目录。
 
-评测不训练、不覆盖权重，输出`metrics.csv`及每个片段的原图/重建对比PNG，不需要弹窗。视频需足够长；帧号从0开始。使用自己的旧权重时，替换`--checkpoint`路径。默认不分发原训练视频和权重，不能保证换视频复现相同数值。
+毕然模块：倍数1在两组真实GOP上保持原重建，倍数2可运行但增加损失。公共/个体特征不自动等于基础/增强层。
 
-新检查点记录训练配置、种子、模型权重及损失；未保存优化器状态，因此不是完整断点续训。旧权重参数名保持兼容。
+代码接口：RGB输入[B,T,3,128,128]，编码特征[B,T,24,32,32]，重建[B,T,3,128,128]。各帧共享参数但独立处理，无跨帧建模；特征尚未量化、独立字节分包。当前丢包模块为特征域固定元素分组擦除。
 
-## 编解码接口
+## 下一步
 
-```python
-from hier_video.models.semantic_encoder import GOPEncoder
-from hier_video.models.semantic_decoder import GOPDecoder
+固定输入、权重、分组和可重放缺失记录，接入丢失与置零对照；随后扩大训练数据，补齐PSNR/LPIPS，与队员推进量化、真实分包、发送字节统计和期限口径，再验证丢包训练、恢复与交织。
 
-encoder = GOPEncoder(embed_dim=24)
-decoder = GOPDecoder(feature_channels=24)
-features = encoder(gop)
-reconstructed = decoder(features)
-```
-
-|对象|格式|说明|
-|---|---|---|
-|输入视频|`[B,T,3,H,W]` float32|RGB、[0,1]；H/W能被4整除|
-|编码特征|`[B,T,24,H/4,W/4]` float32|可为负值，尚未量化|
-|重建视频|`[B,T,3,H,W]` float32|Sigmoid输出[0,1]|
-
-当前各帧共享参数但独立计算，无帧间或跨GOP依赖，没有`layer_id`、真实包大小或码率档位。模型与输入需处于同一设备；训练直接调用`encoder(gop)`，不要调用使用`no_grad()`的`encode_gop_for_inference()`。
-
-## 丢包模块接口
-
-```python
-from hier_video.transmission.packet_loss import simulate_packet_loss
-received, mask, dropped = simulate_packet_loss(features, p=0.1, packet_size=16)
-```
-
-`packet_size`单位为**元素**，不是字节；整个张量统一展平，因此当前可能跨样本/GOP分组。元素总数必须整除包大小。`mask`与特征同形状、bool、True=缺失；`dropped`为一维包级记录。每组独立采样，实际丢失比例不保证等于p。
-
-尚无量化、包头、轨迹持久化、突发丢失或迟到处理，也未与编解码训练入口联接。未来由毕然提供映射、蒋立果提供包事件，杨哲据此构造掩码，避免重复随机丢包。
-
-## 已有结果与边界
-
-杨哲报告的同一视频128×128中心裁剪实验：仅在帧0～3训练5000步，最后训练日志MSE约0.000165；加载后帧0～3为0.000167、帧100～103为0.000519，加载前后输出最大差值0。
-
-这些是原学习流程的实验记录，不是本次重构重新训练所得。当前使用单视频、无量化、无丢包，不证明独立视频泛化、LPIPS、720P、1Mbps或分层能力。详细文字记录见[context](context)。
-
-## 后续协作
-
-先确认特征布局、版本、分组边界与恢复位置；每周提交代码、配置、固定样例、运行命令和检查结果。先回归已验证版本，再单项替换新模块。团队接口融合仍待确认，个人代码完成不等于整周联合验收完成。
-
-方法参考：GRACE（鲁棒训练与独立分包）及MSTVSC（语义表示、交织与恢复）。论文借鉴、部分机制实现与完整复现分别报告。
+本次仅发布第二周代码与已完成记录，不包含正在运行的500轮实验结果或中间权重。第一周原说明存于[docs/week1_readme.md](docs/week1_readme.md)。

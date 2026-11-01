@@ -13,3 +13,7 @@ data/
 *.avi
 *.mov
 *.mkv
+
+# practice/data contains source code, not raw datasets
+!practice/data/
+!practice/data/*.py

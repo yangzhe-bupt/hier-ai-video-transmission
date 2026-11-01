@@ -1,0 +1,35 @@
+[
+  {
+    "split": "train",
+    "film": "Big Buck Bunny",
+    "filename": "big_buck_bunny_trailer_720p.mov",
+    "url": "https://download.blender.org/peach/trailer/trailer_720p.mov",
+    "license": "CC BY 3.0",
+    "license_source": "https://peach.blender.org/about/",
+    "attribution": "(c) copyright 2008, Blender Foundation / www.bigbuckbunny.org",
+    "bytes": 17810888,
+    "sha256": "cb7be60feb4fd4ff5b006e35e824201a48361b7ebc2f2bbcaf3351912035561a"
+  },
+  {
+    "split": "val",
+    "film": "Sintel",
+    "filename": "sintel_trailer_720p.mp4",
+    "url": "https://download.blender.org/durian/trailer/sintel_trailer-720p.mp4",
+    "license": "CC BY 3.0",
+    "license_source": "https://durian.blender.org/sharing/",
+    "attribution": "(c) copyright Blender Foundation | durian.blender.org",
+    "bytes": 7608204,
+    "sha256": "cb0fe73fc0a7d543459996c0cdab730997e6eac1013d3ede18796f777cb7f273"
+  },
+  {
+    "split": "test",
+    "film": "Tears of Steel",
+    "filename": "tears_of_steel_720p.mov",
+    "url": "https://download.blender.org/demo/movies/ToS/tears_of_steel_720p.mov",
+    "license": "CC BY 3.0",
+    "license_source": "https://mango.blender.org/about/",
+    "attribution": "(CC) Blender Foundation | mango.blender.org",
+    "bytes": 372178639,
+    "sha256": "efa9062d9cdb7a338e40ad530dfdf234806743f29ae6a1a136b97ece4e588e8f"
+  }
+]
