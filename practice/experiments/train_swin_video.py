@@ -288,11 +288,29 @@ def main():
         list(encoder.parameters()) + list(decoder.parameters()),
         lr=0.001
     )
-    epochs = 500
+    # 初始化早停与续训状态，必须放在训练循环之前。
     best_val_mse = float("inf")
+    early_stop_best = float("inf")
+    bad_epochs = 0
     history = []
+    start_epoch = 1
+
+    if resume_run_dir is not None:
+        state = restore_training(
+            latest_path, encoder, decoder, optimizer, generator, device
+        )
+        history = state["history"]
+        best_val_mse = state["best_val_mse"]
+        early_stop_best = state["early_stop_best"]
+        bad_epochs = state["bad_epochs"]
+        start_epoch = state["epoch"] + 1
+        if not checkpoint_path.is_file():
+            raise FileNotFoundError("续训目录缺少best.pt，请保留完整实验目录")
+        print(f"已恢复第{start_epoch - 1}轮，将从第{start_epoch}轮继续")
+
     print("运行设备：", device)
-    for epoch in range(0, epochs + 1):
+    # 从1到500，共500轮；续训则从上一完整轮的下一轮开始。
+    for epoch in range(start_epoch, epochs + 1):
         print(f"\n===== Swin第{epoch}/{epochs}轮 =====")
         train_mse = train_one_epoch(
             encoder, decoder, train_loader, optimizer, device
