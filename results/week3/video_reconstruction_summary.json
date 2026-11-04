@@ -1,0 +1,41 @@
+{
+  "video_path": "data/videos/val/sintel_trailer_720p.mp4",
+  "checkpoint_path": "outputs/swin_runs/20261101_203819_892263/best.pt",
+  "best_epoch": 314,
+  "model_config": {
+    "embed_dim": 24,
+    "num_heads": 3,
+    "window_size": 4
+  },
+  "device": "cuda",
+  "crop_size": 128,
+  "gop_size": 4,
+  "max_frames": null,
+  "decoded_input_frames": 1253,
+  "gops": 314,
+  "padding_frames_not_written": 3,
+  "source_nominal_fps": 24.0,
+  "model_mse_before_video_encoding": 0.001753387449114554,
+  "processing_seconds_excluding_setup_and_verification": 4.270434699952602,
+  "processing_fps": 293.4127525738555,
+  "output_videos": {
+    "original": {
+      "frames": 1253,
+      "fps": 24.0,
+      "file_bytes": 745692
+    },
+    "reconstructed": {
+      "frames": 1253,
+      "fps": 24.0,
+      "file_bytes": 648008
+    }
+  },
+  "original_path": "outputs/video_reconstruction/20261104_152746_160047/original_crop.mp4",
+  "reconstructed_path": "outputs/video_reconstruction/20261104_152746_160047/reconstructed.mp4",
+  "limitations": [
+    "128x128默认中心裁剪，无音频，无网络",
+    "MP4另有编码损失，输出文件大小不是学习码流发送量",
+    "恒定标称帧率写出，不保留可变帧率时间戳",
+    "输入读取失败即结束；成功解码帧数不保证等于损坏源文件声明帧数"
+  ]
+}

@@ -156,12 +156,21 @@ def main():
         device
     )
 
+    # 加载本次长训练选出的最佳模型，而不是最后一轮模型
+    swin_checkpoint_path = (
+        outputs_dir
+        / "swin_runs"
+        / "20261101_203819_892263"
+        / "best.pt"
+    )
+
     swin_encoder, swin_decoder, checkpoint = load_swin_models(
-        outputs_dir / "swin_encoder_cnn_decoder_best_v1.pt",
+        swin_checkpoint_path,
         device
     )
 
-    output_dir = outputs_dir / "cnn_swin_comparison"
+    # 本次结果单独保存，不覆盖此前5轮Swin的对照图
+    output_dir = outputs_dir / "cnn_swin_comparison_swin314"
 
     # 固定选择三个片段，不根据哪组模型表现好来挑选。
     # 初次查看后若片段是黑场或转场，需记录并另补有内容的片段。

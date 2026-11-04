@@ -23,3 +23,7 @@ python D:/learn/pytorch/practice/run.py checks/check_biran_integration.py
 运行训练脚本仍会执行其原有底部入口，可能重新训练并覆盖原配置指定的检查点。
 统一入口只兼容文件布局，不调整模型、训练、数据、参数或原导入语句。
 旧__pycache__保留不改动；未创建swin_encoder.py。
+
+## 连续视频重建
+
+`python practice/run.py experiments/reconstruct_video.py`：加载冻结权重，输出两段中心裁剪视频及JSON记录，不训练。完整融合验证由毕然推进。参见仓库results/week3/README.md。
