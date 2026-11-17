@@ -1,0 +1,188 @@
+{
+  "video": "tears_of_steel_720p.mov",
+  "video_sha256": "efa9062d9cdb7a338e40ad530dfdf234806743f29ae6a1a136b97ece4e588e8f",
+  "checkpoint": "20261101_203819_892263/best.pt",
+  "first_frame": 10240,
+  "frames": 384,
+  "seeds": [
+    342,
+    343,
+    344,
+    345
+  ],
+  "path_mtu": 1500,
+  "budget": 20833,
+  "fragment_header_bytes": 14,
+  "ipv4_udp_bytes": 28,
+  "link_rate_bps": 1000000,
+  "deadline_ms": 200,
+  "loss_model": "independent UDP datagram loss with stable fragment IDs",
+  "complete_replay_comparison": true,
+  "results": [
+    {
+      "phase": "clean",
+      "policy": "int4_keep_copy",
+      "cases": 96,
+      "decoded": 96,
+      "enhanced": 0,
+      "mean_sent_bytes": 19401.041666666668,
+      "max_sent_bytes": 19406,
+      "paired_count": 96,
+      "paired_mse": 0.002486043857061304
+    },
+    {
+      "phase": "clean",
+      "policy": "int4_keep_enhancement",
+      "cases": 96,
+      "decoded": 96,
+      "enhanced": 96,
+      "mean_sent_bytes": 17430.083333333332,
+      "max_sent_bytes": 17435,
+      "paired_count": 96,
+      "paired_mse": 0.001987174488021992
+    },
+    {
+      "phase": "clean",
+      "policy": "pool2_layered",
+      "cases": 96,
+      "decoded": 96,
+      "enhanced": 96,
+      "mean_sent_bytes": 20196.25,
+      "max_sent_bytes": 20207,
+      "paired_count": 96,
+      "paired_mse": 0.0013498930262964375
+    },
+    {
+      "phase": "loss_10",
+      "policy": "int4_keep_copy",
+      "cases": 96,
+      "decoded": 33,
+      "enhanced": 0,
+      "mean_sent_bytes": 19404.166666666668,
+      "max_sent_bytes": 19406,
+      "paired_count": 19,
+      "paired_mse": 0.010475074039085916
+    },
+    {
+      "phase": "loss_10",
+      "policy": "int4_keep_enhancement",
+      "cases": 96,
+      "decoded": 19,
+      "enhanced": 16,
+      "mean_sent_bytes": 17432.75,
+      "max_sent_bytes": 17435,
+      "paired_count": 19,
+      "paired_mse": 0.007841361968434955
+    },
+    {
+      "phase": "loss_10",
+      "policy": "pool2_layered",
+      "cases": 96,
+      "decoded": 90,
+      "enhanced": 76,
+      "mean_sent_bytes": 20199.75,
+      "max_sent_bytes": 20207,
+      "paired_count": 19,
+      "paired_mse": 0.00840256572701037
+    },
+    {
+      "phase": "loss_30",
+      "policy": "int4_keep_copy",
+      "cases": 96,
+      "decoded": 1,
+      "enhanced": 0,
+      "mean_sent_bytes": 19405.208333333332,
+      "max_sent_bytes": 19411,
+      "paired_count": 1,
+      "paired_mse": 0.008927878923714161
+    },
+    {
+      "phase": "loss_30",
+      "policy": "int4_keep_enhancement",
+      "cases": 96,
+      "decoded": 1,
+      "enhanced": 0,
+      "mean_sent_bytes": 17433.291666666668,
+      "max_sent_bytes": 17437,
+      "paired_count": 1,
+      "paired_mse": 0.008927878923714161
+    },
+    {
+      "phase": "loss_30",
+      "policy": "pool2_layered",
+      "cases": 96,
+      "decoded": 35,
+      "enhanced": 16,
+      "mean_sent_bytes": 20200.458333333332,
+      "max_sent_bytes": 20206,
+      "paired_count": 1,
+      "paired_mse": 0.009028675965964794
+    },
+    {
+      "phase": "recovered",
+      "policy": "int4_keep_copy",
+      "cases": 96,
+      "decoded": 96,
+      "enhanced": 0,
+      "mean_sent_bytes": 19406.041666666668,
+      "max_sent_bytes": 19411,
+      "paired_count": 96,
+      "paired_mse": 0.012530905194580555
+    },
+    {
+      "phase": "recovered",
+      "policy": "int4_keep_enhancement",
+      "cases": 96,
+      "decoded": 96,
+      "enhanced": 96,
+      "mean_sent_bytes": 17433.916666666668,
+      "max_sent_bytes": 17438,
+      "paired_count": 96,
+      "paired_mse": 0.00765114167976814
+    },
+    {
+      "phase": "recovered",
+      "policy": "pool2_layered",
+      "cases": 96,
+      "decoded": 96,
+      "enhanced": 96,
+      "mean_sent_bytes": 20203.083333333332,
+      "max_sent_bytes": 20206,
+      "paired_count": 96,
+      "paired_mse": 0.007772190591519272
+    },
+    {
+      "phase": "all",
+      "policy": "int4_keep_copy",
+      "cases": 384,
+      "decoded": 226,
+      "enhanced": 0,
+      "mean_sent_bytes": 19404.114583333332,
+      "max_sent_bytes": 19411,
+      "paired_count": 212,
+      "paired_mse": 0.007781044314263986
+    },
+    {
+      "phase": "all",
+      "policy": "int4_keep_enhancement",
+      "cases": 384,
+      "decoded": 212,
+      "enhanced": 208,
+      "mean_sent_bytes": 17432.510416666668,
+      "max_sent_bytes": 17438,
+      "paired_count": 212,
+      "paired_mse": 0.005109396737885995
+    },
+    {
+      "phase": "all",
+      "policy": "pool2_layered",
+      "cases": 384,
+      "decoded": 317,
+      "enhanced": 284,
+      "mean_sent_bytes": 20199.885416666668,
+      "max_sent_bytes": 20207,
+      "paired_count": 212,
+      "paired_mse": 0.0049264030758937255
+    }
+  ]
+}

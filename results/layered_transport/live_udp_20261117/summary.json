@@ -1,0 +1,44 @@
+{
+  "video": "tears_of_steel_720p.mov",
+  "checkpoint": "20261101_203819_892263/best.pt",
+  "device": "cuda",
+  "ip": "127.0.0.1",
+  "first_frame": 10240,
+  "seed": 346,
+  "fps": 24,
+  "rate_bps": 1000000,
+  "deadline_ms": 200.0,
+  "decode_reserve_ms": 10.0,
+  "results": {
+    "clean": {
+      "gops": 96,
+      "decoded_on_time": 83,
+      "late_decode": 13,
+      "frozen_frames": 52,
+      "mean_mse": 0.014352665689178442,
+      "max_encoder_ms": 51.318699996045325,
+      "max_sender_queue_ms": 32.42060000047786,
+      "mean_ready_from_fourth_ms": 193.59359479115787,
+      "max_ready_from_fourth_ms": 218.14940000331262,
+      "max_ready_from_first_ms": 341.45210000133375,
+      "mean_accounted_bytes": 20199.885416666668,
+      "injected_drops": 0,
+      "unexpected_missing": 0
+    },
+    "loss_10": {
+      "gops": 96,
+      "decoded_on_time": 66,
+      "late_decode": 20,
+      "frozen_frames": 120,
+      "mean_mse": 0.015728683481635624,
+      "max_encoder_ms": 30.651299995952286,
+      "max_sender_queue_ms": 6.37789999746019,
+      "mean_ready_from_fourth_ms": 198.61511744187908,
+      "max_ready_from_fourth_ms": 212.62120000028517,
+      "max_ready_from_first_ms": 337.46229999815114,
+      "mean_accounted_bytes": 20199.885416666668,
+      "injected_drops": 208,
+      "unexpected_missing": 0
+    }
+  }
+}

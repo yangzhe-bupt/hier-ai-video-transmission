@@ -1,0 +1,47 @@
+{
+  "address": "127.0.0.1",
+  "video": "tears_of_steel_720p.mov",
+  "checkpoint": "20261101_203819_892263/best.pt",
+  "start_frame": 10240,
+  "gops": 96,
+  "fps": 24,
+  "mtu": 1500,
+  "seed": 346,
+  "rate_bps": 1000000,
+  "deadline_ms": 200,
+  "budget_bytes": 20833,
+  "results": {
+    "clean": {
+      "configured_loss": 0.0,
+      "datagrams": 1728,
+      "received": 1728,
+      "decoded": 96,
+      "enhanced": 96,
+      "fallback": 0,
+      "frozen_frames": 0,
+      "mean_playback_mse": 0.006491564760987482,
+      "max_sender_queue_ms": 2.426503442620742e-09,
+      "max_last_arrival_ms": 165.86893333199805,
+      "mean_accounted_bytes": 20199.885416666668,
+      "late_datagrams": 0,
+      "injected_drops": 0,
+      "unexpected_missing": 0
+    },
+    "loss_10": {
+      "configured_loss": 0.1,
+      "datagrams": 1728,
+      "received": 1520,
+      "decoded": 86,
+      "enhanced": 62,
+      "fallback": 24,
+      "frozen_frames": 40,
+      "mean_playback_mse": 0.009575369901995145,
+      "max_sender_queue_ms": 2.426503442620742e-09,
+      "max_last_arrival_ms": 165.77486666453024,
+      "mean_accounted_bytes": 20199.885416666668,
+      "late_datagrams": 0,
+      "injected_drops": 208,
+      "unexpected_missing": 0
+    }
+  }
+}

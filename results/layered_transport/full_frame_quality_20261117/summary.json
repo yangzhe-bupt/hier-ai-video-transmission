@@ -1,0 +1,54 @@
+{
+  "frame_count": 1253,
+  "resolution": [
+    1280,
+    720
+  ],
+  "fps": 24,
+  "metric_domain": "decoded original and reconstructed MP4 frames, RGB normalized to [0,1]",
+  "source_sha256": "cb0fe73fc0a7d543459996c0cdab730997e6eac1013d3ede18796f777cb7f273",
+  "reference": "sintel_trailer_720p.mp4",
+  "outputs": {
+    "clean": "full_frame_clean.mp4",
+    "loss_10": "full_frame_loss_10.mp4"
+  },
+  "output_sha256": {
+    "clean": "ca24a41e379fe97eb74246047c2109df201c37c2a20ae0ea232608809957c6b9",
+    "loss_10": "a905e6247ad96aa7e84adecb8bc1e513b83fcea98bcfe27b626d8280b3f42473"
+  },
+  "lpips_status": "pending_offline_pretrained_backbone",
+  "results": [
+    {
+      "case": "clean",
+      "frames": 1253,
+      "decoded_gops": 314,
+      "realized_injected_loss": 0.0,
+      "sent_budget_mbps": 0.9710894173982442,
+      "frozen_frames": 0,
+      "longest_freeze_s": 0.0,
+      "mse_rgb": 0.009654612859768874,
+      "global_psnr_rgb_db": 20.152651363058226,
+      "mean_finite_frame_psnr_rgb_db": 25.783960042870813,
+      "perfect_frames": 0,
+      "mean_ssim_rgb": 0.7791846407764633,
+      "mean_temporal_diff_mse_rgb": 0.002438286103536347,
+      "lpips": null
+    },
+    {
+      "case": "loss_10",
+      "frames": 1253,
+      "decoded_gops": 286,
+      "realized_injected_loss": 0.10845718329794762,
+      "sent_budget_mbps": 0.9710894173982442,
+      "frozen_frames": 112,
+      "longest_freeze_s": 0.3333333333333333,
+      "mse_rgb": 0.009994630225558474,
+      "global_psnr_rgb_db": 20.00233268976598,
+      "mean_finite_frame_psnr_rgb_db": 25.677718933669496,
+      "perfect_frames": 0,
+      "mean_ssim_rgb": 0.7766712385326733,
+      "mean_temporal_diff_mse_rgb": 0.0026042984393897842,
+      "lpips": null
+    }
+  ]
+}

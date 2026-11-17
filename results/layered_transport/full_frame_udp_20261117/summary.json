@@ -1,0 +1,48 @@
+{
+  "input": "sintel_trailer_720p.mp4",
+  "checkpoint": "20261101_203819_892263/best.pt",
+  "device": "cuda",
+  "fps": 24,
+  "frames": 1253,
+  "gops": 314,
+  "output_width_height": [
+    1280,
+    720
+  ],
+  "letterbox_xywh": [
+    0,
+    28,
+    128,
+    72
+  ],
+  "model_side": 128,
+  "padding_frames_not_written": 3,
+  "results": {
+    "clean": {
+      "mp4": "full_frame_clean.mp4",
+      "verified_frames": 1253,
+      "decoded_gops": 314,
+      "frozen_frames": 0,
+      "injected": 0,
+      "offered_datagrams": 5652,
+      "received_datagrams": 5652,
+      "unexpected_missing": 0,
+      "mean_accounted_bytes_per_gop": 20182.707006369426,
+      "max_accounted_bytes_per_gop": 20207,
+      "content_mse": 0.007325526811885532
+    },
+    "loss_10": {
+      "mp4": "full_frame_loss_10.mp4",
+      "verified_frames": 1253,
+      "decoded_gops": 286,
+      "frozen_frames": 112,
+      "injected": 613,
+      "offered_datagrams": 5652,
+      "received_datagrams": 5039,
+      "unexpected_missing": 0,
+      "mean_accounted_bytes_per_gop": 20182.707006369426,
+      "max_accounted_bytes_per_gop": 20207,
+      "content_mse": 0.007658596836803523
+    }
+  }
+}

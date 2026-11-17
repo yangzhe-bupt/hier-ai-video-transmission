@@ -1,0 +1,138 @@
+{
+  "video": "tears_of_steel_720p.mov",
+  "video_sha256": "efa9062d9cdb7a338e40ad530dfdf234806743f29ae6a1a136b97ece4e588e8f",
+  "checkpoint": "20261101_203819_892263/best.pt",
+  "checkpoint_sha256": "b3e53b2cd9cf8531f8580b947cf6805f09b956b52b004b0a723a091154555dfb",
+  "device": "cuda",
+  "gop_start_frames": [
+    880,
+    1936,
+    2992,
+    4048,
+    5104,
+    6160,
+    7216,
+    8272,
+    9328,
+    10384,
+    11440,
+    12496,
+    13552,
+    14608,
+    15664,
+    16720
+  ],
+  "seeds": [
+    314,
+    315,
+    316,
+    317,
+    318,
+    319,
+    320,
+    321
+  ],
+  "budget_bytes": 20833,
+  "overhead_bytes": 28,
+  "link": "100 Mbps independent-loss replay with 100 ms deadline and a separate 1 Mbps equivalent GOP byte cap",
+  "clean_means": {
+    "full_float_mse": 0.003115446506853914,
+    "public_float_mse": 0.010636276929290034,
+    "int8_bytes": 27363.75,
+    "int8_mse": 0.010638886462402297,
+    "int4_bytes": 15121.25,
+    "int4_mse": 0.011521355096192565,
+    "pool2_int8_bytes": 8912,
+    "pool2_int8_mse": 0.013851142815838102
+  },
+  "results": [
+    {
+      "loss_rate": 0.0,
+      "profile": "int4",
+      "allow_copies": false,
+      "cases": 16,
+      "decoded": 16,
+      "mean_sent_bytes": 15121.25,
+      "mean_replicas": 0,
+      "paired_cases": 16,
+      "paired_mse": 0.011521355096192565
+    },
+    {
+      "loss_rate": 0.0,
+      "profile": "int4",
+      "allow_copies": true,
+      "cases": 16,
+      "decoded": 16,
+      "mean_sent_bytes": 18901.5625,
+      "mean_replicas": 1,
+      "paired_cases": 16,
+      "paired_mse": 0.011521355096192565
+    },
+    {
+      "loss_rate": 0.0,
+      "profile": "pool2_int8",
+      "allow_copies": false,
+      "cases": 16,
+      "decoded": 16,
+      "mean_sent_bytes": 8912,
+      "mean_replicas": 0,
+      "paired_cases": 16,
+      "paired_mse": 0.013851142815838102
+    },
+    {
+      "loss_rate": 0.0,
+      "profile": "pool2_int8",
+      "allow_copies": true,
+      "cases": 16,
+      "decoded": 16,
+      "mean_sent_bytes": 17824,
+      "mean_replicas": 4,
+      "paired_cases": 16,
+      "paired_mse": 0.013851142815838102
+    },
+    {
+      "loss_rate": 0.1,
+      "profile": "int4",
+      "allow_copies": false,
+      "cases": 128,
+      "decoded": 88,
+      "mean_sent_bytes": 15121.25,
+      "mean_replicas": 0,
+      "paired_cases": 88,
+      "paired_mse": 0.012848978536732664
+    },
+    {
+      "loss_rate": 0.1,
+      "profile": "int4",
+      "allow_copies": true,
+      "cases": 128,
+      "decoded": 95,
+      "mean_sent_bytes": 18901.5625,
+      "mean_replicas": 1,
+      "paired_cases": 88,
+      "paired_mse": 0.012848978536732664
+    },
+    {
+      "loss_rate": 0.1,
+      "profile": "pool2_int8",
+      "allow_copies": false,
+      "cases": 128,
+      "decoded": 88,
+      "mean_sent_bytes": 8912,
+      "mean_replicas": 0,
+      "paired_cases": 88,
+      "paired_mse": 0.015249126551101323
+    },
+    {
+      "loss_rate": 0.1,
+      "profile": "pool2_int8",
+      "allow_copies": true,
+      "cases": 128,
+      "decoded": 125,
+      "mean_sent_bytes": 17824,
+      "mean_replicas": 4,
+      "paired_cases": 88,
+      "paired_mse": 0.015249126551101323
+    }
+  ]
+}

@@ -1,0 +1,146 @@
+{
+  "input": "tears_of_steel_720p.mov",
+  "video_sha256": "efa9062d9cdb7a338e40ad530dfdf234806743f29ae6a1a136b97ece4e588e8f",
+  "checkpoint": "20261101_203819_892263/best.pt",
+  "checkpoint_sha256": "b3e53b2cd9cf8531f8580b947cf6805f09b956b52b004b0a723a091154555dfb",
+  "first_frame": 10240,
+  "last_frame": 10623,
+  "fps": 24,
+  "seed": 342,
+  "device": "cuda",
+  "duration_s": 16.0,
+  "budget_bytes_per_gop": 20833,
+  "per_packet_overhead": 28,
+  "link_rate_bps": 1000000,
+  "deadline_ms": 200,
+  "delay_ms": 20,
+  "phases": [
+    [
+      "clean",
+      0.0
+    ],
+    [
+      "loss_10",
+      0.1
+    ],
+    [
+      "loss_30",
+      0.3
+    ],
+    [
+      "recovered",
+      0.0
+    ]
+  ],
+  "feedback_window": 3,
+  "clock_note": "Continuous source and playback frames; link serialization clock resets per GOP",
+  "output_videos": {
+    "original": {
+      "frames": 384,
+      "fps": 24.0,
+      "file_bytes": 465916
+    },
+    "base": {
+      "frames": 384,
+      "fps": 24.0,
+      "file_bytes": 99886
+    },
+    "layered": {
+      "frames": 384,
+      "fps": 24.0,
+      "file_bytes": 198421
+    }
+  },
+  "results": {
+    "clean": {
+      "gops": 24,
+      "selected_int4": 24,
+      "selected_pool2": 0,
+      "switches": 0,
+      "frozen_gops": 0,
+      "frozen_frames": 0,
+      "longest_freeze_frames": 0,
+      "enhancement_used_gops": 24,
+      "public_fallback_gops": 0,
+      "mean_base_playback_mse": 0.002486043857061304,
+      "mean_layered_playback_mse": 0.001987174488021992,
+      "mean_base_diff_mse": 0.001940194535260768,
+      "mean_layered_diff_mse": 0.0011265338774440654,
+      "mean_base_bytes": 18911.041666666668,
+      "mean_layered_bytes": 20764.291666666668,
+      "max_layered_bytes": 20771
+    },
+    "loss_10": {
+      "gops": 24,
+      "selected_int4": 6,
+      "selected_pool2": 18,
+      "switches": 3,
+      "frozen_gops": 2,
+      "frozen_frames": 8,
+      "longest_freeze_frames": 4,
+      "enhancement_used_gops": 18,
+      "public_fallback_gops": 4,
+      "mean_base_playback_mse": 0.01311329121623809,
+      "mean_layered_playback_mse": 0.010708598730464777,
+      "mean_base_diff_mse": 0.01593614282925652,
+      "mean_layered_diff_mse": 0.0137330157958786,
+      "mean_base_bytes": 18110.041666666668,
+      "mean_layered_bytes": 19963.458333333332,
+      "max_layered_bytes": 20769
+    },
+    "loss_30": {
+      "gops": 24,
+      "selected_int4": 4,
+      "selected_pool2": 20,
+      "switches": 4,
+      "frozen_gops": 8,
+      "frozen_frames": 32,
+      "longest_freeze_frames": 12,
+      "enhancement_used_gops": 7,
+      "public_fallback_gops": 9,
+      "mean_base_playback_mse": 0.018922326853498816,
+      "mean_layered_playback_mse": 0.018531018499440204,
+      "mean_base_diff_mse": 0.02170115024394666,
+      "mean_layered_diff_mse": 0.02084503082248072,
+      "mean_base_bytes": 18021.583333333332,
+      "mean_layered_bytes": 19874.708333333332,
+      "max_layered_bytes": 20769
+    },
+    "recovered": {
+      "gops": 24,
+      "selected_int4": 23,
+      "selected_pool2": 1,
+      "switches": 1,
+      "frozen_gops": 0,
+      "frozen_frames": 0,
+      "longest_freeze_frames": 0,
+      "enhancement_used_gops": 24,
+      "public_fallback_gops": 0,
+      "mean_base_playback_mse": 0.012516473497574529,
+      "mean_layered_playback_mse": 0.007639065064722672,
+      "mean_base_diff_mse": 0.02250506551581566,
+      "mean_layered_diff_mse": 0.015056398308691618,
+      "mean_base_bytes": 18871.416666666668,
+      "mean_layered_bytes": 20724.5,
+      "max_layered_bytes": 20775
+    },
+    "all": {
+      "gops": 96,
+      "selected_int4": 57,
+      "selected_pool2": 39,
+      "switches": 8,
+      "frozen_gops": 10,
+      "frozen_frames": 40,
+      "longest_freeze_frames": 12,
+      "enhancement_used_gops": 73,
+      "public_fallback_gops": 13,
+      "mean_base_playback_mse": 0.011759533856093185,
+      "mean_layered_playback_mse": 0.009716464195662411,
+      "mean_base_diff_mse": 0.015520638281069902,
+      "mean_layered_diff_mse": 0.012690244701123751,
+      "mean_base_bytes": 18478.520833333332,
+      "mean_layered_bytes": 20331.739583333332,
+      "max_layered_bytes": 20775
+    }
+  }
+}
