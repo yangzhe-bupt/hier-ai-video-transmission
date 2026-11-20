@@ -1,0 +1,47 @@
+{
+  "video": "data/videos/01.mp4",
+  "gops": 8,
+  "epochs": 500,
+  "eval_every": 50,
+  "device": "cuda",
+  "seed": 42,
+  "output_root": "<CONQUERING_ROOT>/outputs/step15_video_fit",
+  "video_sha256": "37b7ee8559e55360dae2562819e8e4ee14bb022a8bba61a8e7ecef8be72af9ca",
+  "fps": 58.84770490643441,
+  "decoded_frames": 4547,
+  "gop_starts": [
+    0,
+    648,
+    1296,
+    1944,
+    2592,
+    3240,
+    3888,
+    4540
+  ],
+  "unused_tail_frames": 3,
+  "preprocessing": {
+    "original_hw": [
+      720,
+      960
+    ],
+    "resized_hw": [
+      192,
+      256
+    ],
+    "padding_tblr": [
+      32,
+      32,
+      0,
+      0
+    ]
+  },
+  "model_variant": "common_fig7",
+  "lr": 0.0001,
+  "aux_weight": 0.01,
+  "batch_size": 1,
+  "expected_updates": 4000,
+  "purpose": "same-video training-set fit; no held-out evaluation",
+  "quantization_bits": 3,
+  "note": "sampling/scene cuts and duplicate animation frames retained; not all-video fit until gops=0"
+}

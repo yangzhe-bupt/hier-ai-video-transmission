@@ -1,0 +1,262 @@
+[
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\practice\\README.md",
+    "target": "practice\\README.md",
+    "sha256": "b63a9ec925933db9d81158d38bc4c6bc37c71653abb30de4515d42c5e4599f8c"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\practice\\run.py",
+    "target": "practice\\run.py",
+    "sha256": "64843e47ea4f6d936809551d5051fa4dc4661d4c9c9f4e8a1776b1c3fe5d3a07"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\practice\\shifted_window.py",
+    "target": "practice\\shifted_window.py",
+    "sha256": "40283025748ebea814115faa4a15458a7828e240fec672a80bfebd5f41d2f271"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\practice\\basics\\ANN_泰坦尼克.py",
+    "target": "practice\\basics\\ANN_泰坦尼克.py",
+    "sha256": "e65152acb57532b36419e842f6b36902fa3c03e73957e5c336f372e01ee054c3"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\practice\\basics\\CNN_编解码器.py",
+    "target": "practice\\basics\\CNN_编解码器.py",
+    "sha256": "34971ef93a37776ac783ee7c580de9ff6f931d979982e33f8e7af1a28c46814f"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\practice\\checks\\check_autoencoder.py",
+    "target": "practice\\checks\\check_autoencoder.py",
+    "sha256": "4c27e2550ff6e7e22fc7524789176224480df090ab04d2ccaf05ae962490534f"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\practice\\checks\\check_biran_integration.py",
+    "target": "practice\\checks\\check_biran_integration.py",
+    "sha256": "ce8d76debee08497a10efed9f435514978433284ab8e2857f179dc58128cae16"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\practice\\checks\\check_checkpoint.py",
+    "target": "practice\\checks\\check_checkpoint.py",
+    "sha256": "4648ca063f50e6d90ff7ea8b5d68e3f37d06bdf427545f73e4df5a742d42ff30"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\practice\\checks\\evaluate_biran_integration.py",
+    "target": "practice\\checks\\evaluate_biran_integration.py",
+    "sha256": "6d75641a4a6dcb56c4dffcaa88feb7a36cc3487b8686b591d2a52c81f1eea1b9"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\practice\\data\\gop_index.py",
+    "target": "practice\\data\\gop_index.py",
+    "sha256": "13eecda6d880c0c0f978e938cbe7033bc786faeb64ca73027a6e251c09df5951"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\practice\\data\\video_dataset.py",
+    "target": "practice\\data\\video_dataset.py",
+    "sha256": "52c060775c7090ebac336b8968abe5fe3474e6d91b4f9b4914619d1bf2768fe5"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\practice\\data\\video_folder_dataset.py",
+    "target": "practice\\data\\video_folder_dataset.py",
+    "sha256": "66664dbc6ab83a824a41a63c9e800e8562dcc20537df3a68089bcacc50d6b645"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\practice\\experiments\\compare_cnn_swin.py",
+    "target": "practice\\experiments\\compare_cnn_swin.py",
+    "sha256": "e0b3c7d7dbe2751b8b97fc8df4fba5145b873ab65887870a83c68a43d49cb98f"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\practice\\experiments\\reconstruct_video.py",
+    "target": "practice\\experiments\\reconstruct_video.py",
+    "sha256": "7669234a55392bd3564250e0055c4838a2ab9f4d73050aed3e859e9488e2c3ef"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\practice\\experiments\\recover_individual_residual.py",
+    "target": "practice\\experiments\\recover_individual_residual.py",
+    "sha256": "0da937c2e783a8b2a0f98e8b4b40c6c797aefc9bf83257c34af3795acb330cb7"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\practice\\experiments\\train_swin_video.py",
+    "target": "practice\\experiments\\train_swin_video.py",
+    "sha256": "43e17a68b394e279448c49df04e545b9d19d79347b8a6923804ca7608c9a2ad3"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\practice\\experiments\\train_video.py",
+    "target": "practice\\experiments\\train_video.py",
+    "sha256": "a6b438d21657daa529cc9aed8f1e77581f88e7c82e075f343916edfa0ef31142"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\practice\\experiments\\video_feature_demo.py",
+    "target": "practice\\experiments\\video_feature_demo.py",
+    "sha256": "c0e614e3364209534598522a23d69d676b5476e25a865eede5b8ea8b72208724"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\practice\\models\\semantic_decoder.py",
+    "target": "practice\\models\\semantic_decoder.py",
+    "sha256": "f5b22504172aeb382575d6d503b8a8be83e4250496a87b3e2100da81d4471c6a"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\practice\\models\\semantic_encoder.py",
+    "target": "practice\\models\\semantic_encoder.py",
+    "sha256": "1deb001fc58b6006e59958d89eac464cefa278b8b1f3a8f0d35033f4d7ff99d1"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\practice\\models\\swin_encoder.py",
+    "target": "practice\\models\\swin_encoder.py",
+    "sha256": "37e707024cc5d690f3d39d486720bf1c3cb0939963c4f24546c125ffe6892d34"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\practice\\models\\swin\\shifted_window.py",
+    "target": "practice\\models\\swin\\shifted_window.py",
+    "sha256": "3483329dfdb6a0e92b1500afbf69de3b0dc8310c644c58111f39eda5d16c0f2e"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\practice\\models\\swin\\spatial_window_block.py",
+    "target": "practice\\models\\swin\\spatial_window_block.py",
+    "sha256": "4ac32023c8be9bb0b6634ef71ffeaad2e8f6d2ea319b1b00f17c59053933a9dd"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\practice\\models\\swin\\swin_block_pair.py",
+    "target": "practice\\models\\swin\\swin_block_pair.py",
+    "sha256": "8ea353d117be56276b577bff2ba3c0de7a59cf65f2d71fae1a421d74d3a3eb64"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\practice\\models\\swin\\window_attention.py",
+    "target": "practice\\models\\swin\\window_attention.py",
+    "sha256": "3a766b976f6d4635acf9283543b239a6b11f783daa6ddda7444c597efbac9a0f"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\practice\\models\\swin\\window_transformer_block.py",
+    "target": "practice\\models\\swin\\window_transformer_block.py",
+    "sha256": "3e9d78452ca1f1702d434a78dd9360725fd231c987d235188d8a8ab7181d61c0"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\Biran\\feature_decomposition.py",
+    "target": "Biran\\feature_decomposition.py",
+    "sha256": "6e33975de89ac14d1cd3853df71cd4e73733d1ebd0561c3ca234ecb8fa0ff04f"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\packet\\check_packet_loss.py",
+    "target": "packet\\check_packet_loss.py",
+    "sha256": "abb9750874b4ea94600018f6c3fa690c0699d19633a71a1dd426d640b3d8f796"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\packet\\packet_loss.py",
+    "target": "packet\\packet_loss.py",
+    "sha256": "f42e2bd7626599649d4c6ac1ec21d322fd2f4c692d858974098e2ec1f7e802f1"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\outputs\\PING-III_交接给毕_20261117\\hier_video\\checkpoint.py",
+    "target": "references\\ping_transport\\hier_video\\checkpoint.py",
+    "sha256": "b531cf6a581edf9443a2a6ff42915d472e93a616de18151d8043fd242d17ad09"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\outputs\\PING-III_交接给毕_20261117\\hier_video\\__init__.py",
+    "target": "references\\ping_transport\\hier_video\\__init__.py",
+    "sha256": "66441e1226d216e8de919ce8960e187174f7fda7af622c071f9737c51153f82e"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\outputs\\PING-III_交接给毕_20261117\\hier_video\\experiments\\evaluate.py",
+    "target": "references\\ping_transport\\hier_video\\experiments\\evaluate.py",
+    "sha256": "fc177384869b1f4aab1d3b1cbaf50ac3a3e3d0482e45b019cb46058aca2259de"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\outputs\\PING-III_交接给毕_20261117\\hier_video\\experiments\\train_single_gop.py",
+    "target": "references\\ping_transport\\hier_video\\experiments\\train_single_gop.py",
+    "sha256": "04571c53a9b0c851d1a1c3f6f5af6cb41aa476dc8f76b9e0a006a8b78584dc08"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\outputs\\PING-III_交接给毕_20261117\\hier_video\\experiments\\__init__.py",
+    "target": "references\\ping_transport\\hier_video\\experiments\\__init__.py",
+    "sha256": "66441e1226d216e8de919ce8960e187174f7fda7af622c071f9737c51153f82e"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\outputs\\PING-III_交接给毕_20261117\\hier_video\\models\\semantic_decoder.py",
+    "target": "references\\ping_transport\\hier_video\\models\\semantic_decoder.py",
+    "sha256": "de471fa383d2cb869ee8efdf1945c82c462496b994e042d6d8d245ef5de06488"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\outputs\\PING-III_交接给毕_20261117\\hier_video\\models\\semantic_encoder.py",
+    "target": "references\\ping_transport\\hier_video\\models\\semantic_encoder.py",
+    "sha256": "fe7b1dbf500d7803a77dee7d5adbd9b637fcba0cdb5c77ef3414a1006ee09995"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\outputs\\PING-III_交接给毕_20261117\\hier_video\\models\\__init__.py",
+    "target": "references\\ping_transport\\hier_video\\models\\__init__.py",
+    "sha256": "66441e1226d216e8de919ce8960e187174f7fda7af622c071f9737c51153f82e"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\outputs\\PING-III_交接给毕_20261117\\hier_video\\transmission\\feature_decomposition.py",
+    "target": "references\\ping_transport\\hier_video\\transmission\\feature_decomposition.py",
+    "sha256": "4d7a8d76a424ef3722fc626661eccf89c076aa084ed4ae3c24fee3d5c07bf125"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\outputs\\PING-III_交接给毕_20261117\\hier_video\\transmission\\feature_mapping.py",
+    "target": "references\\ping_transport\\hier_video\\transmission\\feature_mapping.py",
+    "sha256": "54a55aa961893068b74d9cbd3bbf77a7df6cafb73e780d395acfe79af079177c"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\outputs\\PING-III_交接给毕_20261117\\hier_video\\transmission\\layered_public_codec.py",
+    "target": "references\\ping_transport\\hier_video\\transmission\\layered_public_codec.py",
+    "sha256": "09ddbd7195d634ace14fd948fa61784b6fb4ffd0b34168275cdfe77c7e96024f"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\outputs\\PING-III_交接给毕_20261117\\hier_video\\transmission\\network_replay.py",
+    "target": "references\\ping_transport\\hier_video\\transmission\\network_replay.py",
+    "sha256": "585b9cd7faf95b62a8b2811615354d109ca4d97d08249d5bd7d1999e45fc9996"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\outputs\\PING-III_交接给毕_20261117\\hier_video\\transmission\\packetization.py",
+    "target": "references\\ping_transport\\hier_video\\transmission\\packetization.py",
+    "sha256": "a0b36813d096cb5422da4122022fbbdb3adfaa5a352cb9b095c4a0bffd72eabc"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\outputs\\PING-III_交接给毕_20261117\\hier_video\\transmission\\packet_loss.py",
+    "target": "references\\ping_transport\\hier_video\\transmission\\packet_loss.py",
+    "sha256": "b58da1ccd61a27b9ff2e237db7692215c14d369b391b0a6c780efd8aa0a4ed3b"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\outputs\\PING-III_交接给毕_20261117\\hier_video\\transmission\\public_base_codec.py",
+    "target": "references\\ping_transport\\hier_video\\transmission\\public_base_codec.py",
+    "sha256": "9fd47394dbb6c22a13630381f833cebfec4246e35b2a2a6fed8f83d390277e2d"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\outputs\\PING-III_交接给毕_20261117\\hier_video\\transmission\\public_protection_control.py",
+    "target": "references\\ping_transport\\hier_video\\transmission\\public_protection_control.py",
+    "sha256": "97f1a942be4d7a37527c633d1a1b41ccbe00c7148b66fe2eba066dccc294cd43"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\outputs\\PING-III_交接给毕_20261117\\hier_video\\transmission\\quantization.py",
+    "target": "references\\ping_transport\\hier_video\\transmission\\quantization.py",
+    "sha256": "f1e72edacf81e7138b7a5822bf6f4f7295cf068b0548e73bf93ff986d1673565"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\outputs\\PING-III_交接给毕_20261117\\hier_video\\transmission\\reception_audit.py",
+    "target": "references\\ping_transport\\hier_video\\transmission\\reception_audit.py",
+    "sha256": "f3dbcce63e77f698c0bd29341c72a5d83adee8c4d95790a19916721553729428"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\outputs\\PING-III_交接给毕_20261117\\hier_video\\transmission\\reference_delivery.py",
+    "target": "references\\ping_transport\\hier_video\\transmission\\reference_delivery.py",
+    "sha256": "e00ce5c6c75a065ee8160341034371f87f32cc4f4b16ff643e03b7bdd865410e"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\outputs\\PING-III_交接给毕_20261117\\hier_video\\transmission\\reference_layers.py",
+    "target": "references\\ping_transport\\hier_video\\transmission\\reference_layers.py",
+    "sha256": "40ee1f7a058927a3cf505aa9e9b416f67e782ba257431db697a571f2f25b0571"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\outputs\\PING-III_交接给毕_20261117\\hier_video\\transmission\\reference_transport.py",
+    "target": "references\\ping_transport\\hier_video\\transmission\\reference_transport.py",
+    "sha256": "0b8eb984ad067b93941c2fb3ebde59bd3271189872ec67106242d5013cdf82a3"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\outputs\\PING-III_交接给毕_20261117\\hier_video\\transmission\\udp_feature_fragments.py",
+    "target": "references\\ping_transport\\hier_video\\transmission\\udp_feature_fragments.py",
+    "sha256": "99cbc2ec418ead1d2a1b1660db181cd1d37ca98ec5179f46496fa6b33c3648f7"
+  },
+  {
+    "source": "D:\\学习与项目\\学习代码\\pytorch\\outputs\\PING-III_交接给毕_20261117\\hier_video\\transmission\\__init__.py",
+    "target": "references\\ping_transport\\hier_video\\transmission\\__init__.py",
+    "sha256": "541f143a1f051c8a90e00bb329ae0eb5d135d8ac6cd836a0f38cd6a88f1b5cc7"
+  }
+]

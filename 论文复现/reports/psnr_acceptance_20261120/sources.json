@@ -1,0 +1,72 @@
+{
+  "source": ".\\outputs\\20261120_143206_105127",
+  "frames": [
+    2273,
+    2274,
+    2275,
+    2276
+  ],
+  "note": "original saved montage PNGs, CSS displays top/reference and bottom/reconstruction thirds; no synthetic blur",
+  "items": [
+    {
+      "label": "A",
+      "file": "version_A.png",
+      "step": 3000,
+      "psnr_db": 29.84187807615885,
+      "mse": 0.0010370798408985138,
+      "width": 1400,
+      "height": 1120,
+      "source": ".\\outputs\\20261120_143206_105127\\reconstruction_3000_valid.png"
+    },
+    {
+      "label": "B",
+      "file": "version_B.png",
+      "step": 5000,
+      "psnr_db": 33.39801876467541,
+      "mse": 0.0004572967591229826,
+      "width": 1400,
+      "height": 1120,
+      "source": ".\\outputs\\20261120_143206_105127\\reconstruction_5000_valid.png"
+    },
+    {
+      "label": "C",
+      "file": "version_C.png",
+      "step": 2000,
+      "psnr_db": 27.575376754381114,
+      "mse": 0.001747681642882526,
+      "width": 1400,
+      "height": 1120,
+      "source": ".\\outputs\\20261120_143206_105127\\reconstruction_2000_valid.png"
+    },
+    {
+      "label": "D",
+      "file": "version_D.png",
+      "step": 1500,
+      "psnr_db": 25.770101740097072,
+      "mse": 0.0026484380941838026,
+      "width": 1400,
+      "height": 1120,
+      "source": ".\\outputs\\20261120_143206_105127\\reconstruction_1500_valid.png"
+    },
+    {
+      "label": "E",
+      "file": "version_E.png",
+      "step": 4000,
+      "psnr_db": 31.80509562565124,
+      "mse": 0.0006599187036044896,
+      "width": 1400,
+      "height": 1120,
+      "source": ".\\outputs\\20261120_143206_105127\\reconstruction_4000_valid.png"
+    },
+    {
+      "label": "F",
+      "file": "version_F.png",
+      "step": 1000,
+      "psnr_db": 23.67833421188577,
+      "mse": 0.004287129268050194,
+      "width": 1400,
+      "height": 1120,
+      "source": ".\\outputs\\20261120_143206_105127\\reconstruction_1000_valid.png"
+    }
+  ]
+}

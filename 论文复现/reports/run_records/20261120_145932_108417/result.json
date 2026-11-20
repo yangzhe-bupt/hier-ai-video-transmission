@@ -1,0 +1,16 @@
+{
+  "status": "completed",
+  "final": {
+    "epoch": 500,
+    "updates": 4000,
+    "mean_mse": 0.005040153570007533,
+    "pooled_psnr_db": 22.975562306991616,
+    "worst_gop_psnr_db": 21.650367216098118,
+    "elapsed_seconds": 1013.0375990886241
+  },
+  "best_mse": 0.005040153570007533,
+  "best_epoch": 500,
+  "samples_per_epoch": 8,
+  "visits_per_gop": 500,
+  "cuda_peak_allocated_mib": 954.12255859375
+}

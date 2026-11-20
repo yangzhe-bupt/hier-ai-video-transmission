@@ -1,0 +1,19 @@
+{
+  "status": "completed",
+  "final": {
+    "epoch": 5000,
+    "updates": 40000,
+    "mean_mse": 0.0005177233942958992,
+    "pooled_psnr_db": 32.859022101696524,
+    "worst_gop_psnr_db": 30.918530446136568,
+    "elapsed_seconds": 8715.295209160075
+  },
+  "best_mse": 0.0005128799512021942,
+  "best_epoch": 4750,
+  "samples_per_epoch": 8,
+  "visits_per_gop": 5000,
+  "start_epoch": 500,
+  "updates_this_run": 36000,
+  "best_scope": "current run including resumed start",
+  "cuda_peak_allocated_mib": 956.85888671875
+}

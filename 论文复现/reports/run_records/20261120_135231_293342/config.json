@@ -1,0 +1,46 @@
+{
+  "video": "<CONQUERING_ROOT>/data/videos/new_year.mp4",
+  "start_frame": 239,
+  "device": "cuda",
+  "steps": 1000,
+  "eval_every": 100,
+  "lr": 0.0001,
+  "seed": 42,
+  "output_root": "<CONQUERING_ROOT>/outputs/step14_spatial_probe",
+  "video_sha256": "b407f83d58c66124d1e3f39be06cbeea9c31cd3531473a208c1eff64e9100d9d",
+  "preprocessing": {
+    "original_hw": [
+      1088,
+      612
+    ],
+    "resized_hw": [
+      256,
+      144
+    ],
+    "padding_tblr": [
+      0,
+      0,
+      56,
+      56
+    ]
+  },
+  "parameters": 434364,
+  "loss": "valid-area MSE only",
+  "detail_region": "lower half of valid image, fixed before training",
+  "detail_tlbr": [
+    128,
+    56,
+    256,
+    200
+  ],
+  "optimizer": "Adam",
+  "grad_clip": 1.0,
+  "latent_shape": [
+    1,
+    4,
+    72,
+    32,
+    32
+  ],
+  "note": "spatial-only, no quantization; not equal bitrate comparison"
+}

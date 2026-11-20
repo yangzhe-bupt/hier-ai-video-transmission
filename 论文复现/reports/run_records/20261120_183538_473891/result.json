@@ -1,0 +1,21 @@
+{
+  "status": "completed",
+  "final": {
+    "epoch": 10,
+    "updates": 11370,
+    "mean_mse": 0.006050699659132556,
+    "pooled_psnr_db": 22.18194403772022,
+    "worst_gop_psnr_db": 16.658753672239843,
+    "elapsed_seconds": 3556.7361466083676,
+    "initialization_gops_psnr_db": 23.78454206654898,
+    "new_gops_psnr_db": 22.172456058507088
+  },
+  "best_mse": 0.006050699659132556,
+  "best_epoch": 10,
+  "samples_per_epoch": 1137,
+  "visits_per_gop": 10,
+  "start_epoch": 0,
+  "updates_this_run": 11370,
+  "best_scope": "current run including resumed start",
+  "cuda_peak_allocated_mib": 957.0546875
+}

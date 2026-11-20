@@ -1,0 +1,539 @@
+Stage1Model(
+  (spatial_encoder): SpatialEncoder(
+    (patch_embed): PatchEmbedding(
+      (conv): Conv2d(3, 24, kernel_size=(2, 2), stride=(2, 2))
+    )
+    (stage1): SwinBlockPair(
+      (regular_block): SpatialWindowBlock(
+        (block): WindowTransformerBlock(
+          (norm1): LayerNorm((24,), eps=1e-05, elementwise_affine=True)
+          (attention): WindowAttention(
+            (qkv): WindowQKV(
+              (qkv): Linear(in_features=24, out_features=72, bias=True)
+            )
+            (relative_position_bias): RelativePositionBias()
+            (proj): Linear(in_features=24, out_features=24, bias=True)
+          )
+          (norm2): LayerNorm((24,), eps=1e-05, elementwise_affine=True)
+          (mlp): Sequential(
+            (0): Linear(in_features=24, out_features=96, bias=True)
+            (1): GELU(approximate='none')
+            (2): Linear(in_features=96, out_features=24, bias=True)
+          )
+        )
+      )
+      (shifted_block): ShiftedWindowBlock(
+        (block): WindowTransformerBlock(
+          (norm1): LayerNorm((24,), eps=1e-05, elementwise_affine=True)
+          (attention): WindowAttention(
+            (qkv): WindowQKV(
+              (qkv): Linear(in_features=24, out_features=72, bias=True)
+            )
+            (relative_position_bias): RelativePositionBias()
+            (proj): Linear(in_features=24, out_features=24, bias=True)
+          )
+          (norm2): LayerNorm((24,), eps=1e-05, elementwise_affine=True)
+          (mlp): Sequential(
+            (0): Linear(in_features=24, out_features=96, bias=True)
+            (1): GELU(approximate='none')
+            (2): Linear(in_features=96, out_features=24, bias=True)
+          )
+        )
+      )
+    )
+    (merge1): PatchMerging(
+      (norm): LayerNorm((96,), eps=1e-05, elementwise_affine=True)
+      (reduction): Linear(in_features=96, out_features=48, bias=False)
+    )
+    (stage2): SwinBlockPair(
+      (regular_block): SpatialWindowBlock(
+        (block): WindowTransformerBlock(
+          (norm1): LayerNorm((48,), eps=1e-05, elementwise_affine=True)
+          (attention): WindowAttention(
+            (qkv): WindowQKV(
+              (qkv): Linear(in_features=48, out_features=144, bias=True)
+            )
+            (relative_position_bias): RelativePositionBias()
+            (proj): Linear(in_features=48, out_features=48, bias=True)
+          )
+          (norm2): LayerNorm((48,), eps=1e-05, elementwise_affine=True)
+          (mlp): Sequential(
+            (0): Linear(in_features=48, out_features=192, bias=True)
+            (1): GELU(approximate='none')
+            (2): Linear(in_features=192, out_features=48, bias=True)
+          )
+        )
+      )
+      (shifted_block): ShiftedWindowBlock(
+        (block): WindowTransformerBlock(
+          (norm1): LayerNorm((48,), eps=1e-05, elementwise_affine=True)
+          (attention): WindowAttention(
+            (qkv): WindowQKV(
+              (qkv): Linear(in_features=48, out_features=144, bias=True)
+            )
+            (relative_position_bias): RelativePositionBias()
+            (proj): Linear(in_features=48, out_features=48, bias=True)
+          )
+          (norm2): LayerNorm((48,), eps=1e-05, elementwise_affine=True)
+          (mlp): Sequential(
+            (0): Linear(in_features=48, out_features=192, bias=True)
+            (1): GELU(approximate='none')
+            (2): Linear(in_features=192, out_features=48, bias=True)
+          )
+        )
+      )
+    )
+    (merge2): PatchMerging(
+      (norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+      (reduction): Linear(in_features=192, out_features=72, bias=False)
+    )
+    (stage3): SwinBlockPair(
+      (regular_block): SpatialWindowBlock(
+        (block): WindowTransformerBlock(
+          (norm1): LayerNorm((72,), eps=1e-05, elementwise_affine=True)
+          (attention): WindowAttention(
+            (qkv): WindowQKV(
+              (qkv): Linear(in_features=72, out_features=216, bias=True)
+            )
+            (relative_position_bias): RelativePositionBias()
+            (proj): Linear(in_features=72, out_features=72, bias=True)
+          )
+          (norm2): LayerNorm((72,), eps=1e-05, elementwise_affine=True)
+          (mlp): Sequential(
+            (0): Linear(in_features=72, out_features=288, bias=True)
+            (1): GELU(approximate='none')
+            (2): Linear(in_features=288, out_features=72, bias=True)
+          )
+        )
+      )
+      (shifted_block): ShiftedWindowBlock(
+        (block): WindowTransformerBlock(
+          (norm1): LayerNorm((72,), eps=1e-05, elementwise_affine=True)
+          (attention): WindowAttention(
+            (qkv): WindowQKV(
+              (qkv): Linear(in_features=72, out_features=216, bias=True)
+            )
+            (relative_position_bias): RelativePositionBias()
+            (proj): Linear(in_features=72, out_features=72, bias=True)
+          )
+          (norm2): LayerNorm((72,), eps=1e-05, elementwise_affine=True)
+          (mlp): Sequential(
+            (0): Linear(in_features=72, out_features=288, bias=True)
+            (1): GELU(approximate='none')
+            (2): Linear(in_features=288, out_features=72, bias=True)
+          )
+        )
+      )
+    )
+  )
+  (temporal_encoder): SpatiotemporalEncoder(
+    (stage4): SpatiotemporalStage(
+      (merge): PatchMerging(
+        (norm): LayerNorm((288,), eps=1e-05, elementwise_affine=True)
+        (reduction): Linear(in_features=288, out_features=96, bias=False)
+      )
+      (blocks): Sequential(
+        (0): SwinBlock3D(
+          (norm1): LayerNorm((96,), eps=1e-05, elementwise_affine=True)
+          (norm2): LayerNorm((96,), eps=1e-05, elementwise_affine=True)
+          (attention): WindowAttention3D(
+            (qkv): Linear(in_features=96, out_features=288, bias=True)
+            (proj): Linear(in_features=96, out_features=96, bias=True)
+          )
+          (mlp): SparseMoE(
+            (router): TopKRouter(
+              (gate): Linear(in_features=96, out_features=4, bias=False)
+            )
+            (experts): ModuleList(
+              (0-3): 4 x FeedForwardExpert(
+                (network): Sequential(
+                  (0): Linear(in_features=96, out_features=384, bias=True)
+                  (1): GELU(approximate='none')
+                  (2): Linear(in_features=384, out_features=96, bias=True)
+                )
+              )
+            )
+          )
+        )
+        (1): SwinBlock3D(
+          (norm1): LayerNorm((96,), eps=1e-05, elementwise_affine=True)
+          (norm2): LayerNorm((96,), eps=1e-05, elementwise_affine=True)
+          (attention): WindowAttention3D(
+            (qkv): Linear(in_features=96, out_features=288, bias=True)
+            (proj): Linear(in_features=96, out_features=96, bias=True)
+          )
+          (mlp): SparseMoE(
+            (router): TopKRouter(
+              (gate): Linear(in_features=96, out_features=4, bias=False)
+            )
+            (experts): ModuleList(
+              (0-3): 4 x FeedForwardExpert(
+                (network): Sequential(
+                  (0): Linear(in_features=96, out_features=384, bias=True)
+                  (1): GELU(approximate='none')
+                  (2): Linear(in_features=384, out_features=96, bias=True)
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+    (stage5): SpatiotemporalStage(
+      (merge): PatchMerging(
+        (norm): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+        (reduction): Linear(in_features=384, out_features=120, bias=False)
+      )
+      (blocks): Sequential(
+        (0): SwinBlock3D(
+          (norm1): LayerNorm((120,), eps=1e-05, elementwise_affine=True)
+          (norm2): LayerNorm((120,), eps=1e-05, elementwise_affine=True)
+          (attention): WindowAttention3D(
+            (qkv): Linear(in_features=120, out_features=360, bias=True)
+            (proj): Linear(in_features=120, out_features=120, bias=True)
+          )
+          (mlp): SparseMoE(
+            (router): TopKRouter(
+              (gate): Linear(in_features=120, out_features=4, bias=False)
+            )
+            (experts): ModuleList(
+              (0-3): 4 x FeedForwardExpert(
+                (network): Sequential(
+                  (0): Linear(in_features=120, out_features=480, bias=True)
+                  (1): GELU(approximate='none')
+                  (2): Linear(in_features=480, out_features=120, bias=True)
+                )
+              )
+            )
+          )
+        )
+        (1): SwinBlock3D(
+          (norm1): LayerNorm((120,), eps=1e-05, elementwise_affine=True)
+          (norm2): LayerNorm((120,), eps=1e-05, elementwise_affine=True)
+          (attention): WindowAttention3D(
+            (qkv): Linear(in_features=120, out_features=360, bias=True)
+            (proj): Linear(in_features=120, out_features=120, bias=True)
+          )
+          (mlp): SparseMoE(
+            (router): TopKRouter(
+              (gate): Linear(in_features=120, out_features=4, bias=False)
+            )
+            (experts): ModuleList(
+              (0-3): 4 x FeedForwardExpert(
+                (network): Sequential(
+                  (0): Linear(in_features=120, out_features=480, bias=True)
+                  (1): GELU(approximate='none')
+                  (2): Linear(in_features=480, out_features=120, bias=True)
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+  )
+  (common_extractor): Figure7CommonExtractor(
+    (temporal_compression): Conv3d(120, 120, kernel_size=(4, 3, 3), stride=(4, 1, 1), padding=(0, 1, 1))
+    (activation): GELU(approximate='none')
+    (channel_mixing): Conv3d(120, 120, kernel_size=(1, 1, 1), stride=(1, 1, 1))
+    (refinement): Sequential(
+      (0): Conv2d(120, 120, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): GELU(approximate='none')
+      (2): Conv2d(120, 120, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (3): GELU(approximate='none')
+    )
+  )
+  (individual_extractor): IndividualFeatureExtractor(
+    (merge): PatchMerging(
+      (norm): LayerNorm((480,), eps=1e-05, elementwise_affine=True)
+      (reduction): Linear(in_features=480, out_features=144, bias=False)
+    )
+    (block): SwinBlock3D(
+      (norm1): LayerNorm((144,), eps=1e-05, elementwise_affine=True)
+      (norm2): LayerNorm((144,), eps=1e-05, elementwise_affine=True)
+      (attention): WindowAttention3D(
+        (qkv): Linear(in_features=144, out_features=432, bias=True)
+        (proj): Linear(in_features=144, out_features=144, bias=True)
+      )
+      (mlp): SparseMoE(
+        (router): TopKRouter(
+          (gate): Linear(in_features=144, out_features=4, bias=False)
+        )
+        (experts): ModuleList(
+          (0-3): 4 x FeedForwardExpert(
+            (network): Sequential(
+              (0): Linear(in_features=144, out_features=576, bias=True)
+              (1): GELU(approximate='none')
+              (2): Linear(in_features=576, out_features=144, bias=True)
+            )
+          )
+        )
+      )
+    )
+  )
+  (individual_upsample): IndividualUpsample(
+    (block): SwinBlock3D(
+      (norm1): LayerNorm((144,), eps=1e-05, elementwise_affine=True)
+      (norm2): LayerNorm((144,), eps=1e-05, elementwise_affine=True)
+      (attention): WindowAttention3D(
+        (qkv): Linear(in_features=144, out_features=432, bias=True)
+        (proj): Linear(in_features=144, out_features=144, bias=True)
+      )
+      (mlp): SparseMoE(
+        (router): TopKRouter(
+          (gate): Linear(in_features=144, out_features=4, bias=False)
+        )
+        (experts): ModuleList(
+          (0-3): 4 x FeedForwardExpert(
+            (network): Sequential(
+              (0): Linear(in_features=144, out_features=576, bias=True)
+              (1): GELU(approximate='none')
+              (2): Linear(in_features=576, out_features=144, bias=True)
+            )
+          )
+        )
+      )
+    )
+    (expansion): PatchExpansion(
+      (expansion): Linear(in_features=144, out_features=480, bias=False)
+      (shuffle): PixelShuffle(upscale_factor=2)
+    )
+  )
+  (temporal_decoder): SpatiotemporalDecoder(
+    (decode_stage5): SpatiotemporalDecoderStage(
+      (blocks): Sequential(
+        (0): SwinBlock3D(
+          (norm1): LayerNorm((120,), eps=1e-05, elementwise_affine=True)
+          (norm2): LayerNorm((120,), eps=1e-05, elementwise_affine=True)
+          (attention): WindowAttention3D(
+            (qkv): Linear(in_features=120, out_features=360, bias=True)
+            (proj): Linear(in_features=120, out_features=120, bias=True)
+          )
+          (mlp): SparseMoE(
+            (router): TopKRouter(
+              (gate): Linear(in_features=120, out_features=4, bias=False)
+            )
+            (experts): ModuleList(
+              (0-3): 4 x FeedForwardExpert(
+                (network): Sequential(
+                  (0): Linear(in_features=120, out_features=480, bias=True)
+                  (1): GELU(approximate='none')
+                  (2): Linear(in_features=480, out_features=120, bias=True)
+                )
+              )
+            )
+          )
+        )
+        (1): SwinBlock3D(
+          (norm1): LayerNorm((120,), eps=1e-05, elementwise_affine=True)
+          (norm2): LayerNorm((120,), eps=1e-05, elementwise_affine=True)
+          (attention): WindowAttention3D(
+            (qkv): Linear(in_features=120, out_features=360, bias=True)
+            (proj): Linear(in_features=120, out_features=120, bias=True)
+          )
+          (mlp): SparseMoE(
+            (router): TopKRouter(
+              (gate): Linear(in_features=120, out_features=4, bias=False)
+            )
+            (experts): ModuleList(
+              (0-3): 4 x FeedForwardExpert(
+                (network): Sequential(
+                  (0): Linear(in_features=120, out_features=480, bias=True)
+                  (1): GELU(approximate='none')
+                  (2): Linear(in_features=480, out_features=120, bias=True)
+                )
+              )
+            )
+          )
+        )
+      )
+      (expansion): PatchExpansion(
+        (expansion): Linear(in_features=120, out_features=384, bias=False)
+        (shuffle): PixelShuffle(upscale_factor=2)
+      )
+    )
+    (decode_stage4): SpatiotemporalDecoderStage(
+      (blocks): Sequential(
+        (0): SwinBlock3D(
+          (norm1): LayerNorm((96,), eps=1e-05, elementwise_affine=True)
+          (norm2): LayerNorm((96,), eps=1e-05, elementwise_affine=True)
+          (attention): WindowAttention3D(
+            (qkv): Linear(in_features=96, out_features=288, bias=True)
+            (proj): Linear(in_features=96, out_features=96, bias=True)
+          )
+          (mlp): SparseMoE(
+            (router): TopKRouter(
+              (gate): Linear(in_features=96, out_features=4, bias=False)
+            )
+            (experts): ModuleList(
+              (0-3): 4 x FeedForwardExpert(
+                (network): Sequential(
+                  (0): Linear(in_features=96, out_features=384, bias=True)
+                  (1): GELU(approximate='none')
+                  (2): Linear(in_features=384, out_features=96, bias=True)
+                )
+              )
+            )
+          )
+        )
+        (1): SwinBlock3D(
+          (norm1): LayerNorm((96,), eps=1e-05, elementwise_affine=True)
+          (norm2): LayerNorm((96,), eps=1e-05, elementwise_affine=True)
+          (attention): WindowAttention3D(
+            (qkv): Linear(in_features=96, out_features=288, bias=True)
+            (proj): Linear(in_features=96, out_features=96, bias=True)
+          )
+          (mlp): SparseMoE(
+            (router): TopKRouter(
+              (gate): Linear(in_features=96, out_features=4, bias=False)
+            )
+            (experts): ModuleList(
+              (0-3): 4 x FeedForwardExpert(
+                (network): Sequential(
+                  (0): Linear(in_features=96, out_features=384, bias=True)
+                  (1): GELU(approximate='none')
+                  (2): Linear(in_features=384, out_features=96, bias=True)
+                )
+              )
+            )
+          )
+        )
+      )
+      (expansion): PatchExpansion(
+        (expansion): Linear(in_features=96, out_features=288, bias=False)
+        (shuffle): PixelShuffle(upscale_factor=2)
+      )
+    )
+  )
+  (spatial_decoder): SpatialDecoder(
+    (stage3): SwinBlockPair(
+      (regular_block): SpatialWindowBlock(
+        (block): WindowTransformerBlock(
+          (norm1): LayerNorm((72,), eps=1e-05, elementwise_affine=True)
+          (attention): WindowAttention(
+            (qkv): WindowQKV(
+              (qkv): Linear(in_features=72, out_features=216, bias=True)
+            )
+            (relative_position_bias): RelativePositionBias()
+            (proj): Linear(in_features=72, out_features=72, bias=True)
+          )
+          (norm2): LayerNorm((72,), eps=1e-05, elementwise_affine=True)
+          (mlp): Sequential(
+            (0): Linear(in_features=72, out_features=288, bias=True)
+            (1): GELU(approximate='none')
+            (2): Linear(in_features=288, out_features=72, bias=True)
+          )
+        )
+      )
+      (shifted_block): ShiftedWindowBlock(
+        (block): WindowTransformerBlock(
+          (norm1): LayerNorm((72,), eps=1e-05, elementwise_affine=True)
+          (attention): WindowAttention(
+            (qkv): WindowQKV(
+              (qkv): Linear(in_features=72, out_features=216, bias=True)
+            )
+            (relative_position_bias): RelativePositionBias()
+            (proj): Linear(in_features=72, out_features=72, bias=True)
+          )
+          (norm2): LayerNorm((72,), eps=1e-05, elementwise_affine=True)
+          (mlp): Sequential(
+            (0): Linear(in_features=72, out_features=288, bias=True)
+            (1): GELU(approximate='none')
+            (2): Linear(in_features=288, out_features=72, bias=True)
+          )
+        )
+      )
+    )
+    (expand3): PatchExpansion(
+      (expansion): Linear(in_features=72, out_features=192, bias=False)
+      (shuffle): PixelShuffle(upscale_factor=2)
+    )
+    (stage2): SwinBlockPair(
+      (regular_block): SpatialWindowBlock(
+        (block): WindowTransformerBlock(
+          (norm1): LayerNorm((48,), eps=1e-05, elementwise_affine=True)
+          (attention): WindowAttention(
+            (qkv): WindowQKV(
+              (qkv): Linear(in_features=48, out_features=144, bias=True)
+            )
+            (relative_position_bias): RelativePositionBias()
+            (proj): Linear(in_features=48, out_features=48, bias=True)
+          )
+          (norm2): LayerNorm((48,), eps=1e-05, elementwise_affine=True)
+          (mlp): Sequential(
+            (0): Linear(in_features=48, out_features=192, bias=True)
+            (1): GELU(approximate='none')
+            (2): Linear(in_features=192, out_features=48, bias=True)
+          )
+        )
+      )
+      (shifted_block): ShiftedWindowBlock(
+        (block): WindowTransformerBlock(
+          (norm1): LayerNorm((48,), eps=1e-05, elementwise_affine=True)
+          (attention): WindowAttention(
+            (qkv): WindowQKV(
+              (qkv): Linear(in_features=48, out_features=144, bias=True)
+            )
+            (relative_position_bias): RelativePositionBias()
+            (proj): Linear(in_features=48, out_features=48, bias=True)
+          )
+          (norm2): LayerNorm((48,), eps=1e-05, elementwise_affine=True)
+          (mlp): Sequential(
+            (0): Linear(in_features=48, out_features=192, bias=True)
+            (1): GELU(approximate='none')
+            (2): Linear(in_features=192, out_features=48, bias=True)
+          )
+        )
+      )
+    )
+    (expand2): PatchExpansion(
+      (expansion): Linear(in_features=48, out_features=96, bias=False)
+      (shuffle): PixelShuffle(upscale_factor=2)
+    )
+    (stage1): SwinBlockPair(
+      (regular_block): SpatialWindowBlock(
+        (block): WindowTransformerBlock(
+          (norm1): LayerNorm((24,), eps=1e-05, elementwise_affine=True)
+          (attention): WindowAttention(
+            (qkv): WindowQKV(
+              (qkv): Linear(in_features=24, out_features=72, bias=True)
+            )
+            (relative_position_bias): RelativePositionBias()
+            (proj): Linear(in_features=24, out_features=24, bias=True)
+          )
+          (norm2): LayerNorm((24,), eps=1e-05, elementwise_affine=True)
+          (mlp): Sequential(
+            (0): Linear(in_features=24, out_features=96, bias=True)
+            (1): GELU(approximate='none')
+            (2): Linear(in_features=96, out_features=24, bias=True)
+          )
+        )
+      )
+      (shifted_block): ShiftedWindowBlock(
+        (block): WindowTransformerBlock(
+          (norm1): LayerNorm((24,), eps=1e-05, elementwise_affine=True)
+          (attention): WindowAttention(
+            (qkv): WindowQKV(
+              (qkv): Linear(in_features=24, out_features=72, bias=True)
+            )
+            (relative_position_bias): RelativePositionBias()
+            (proj): Linear(in_features=24, out_features=24, bias=True)
+          )
+          (norm2): LayerNorm((24,), eps=1e-05, elementwise_affine=True)
+          (mlp): Sequential(
+            (0): Linear(in_features=24, out_features=96, bias=True)
+            (1): GELU(approximate='none')
+            (2): Linear(in_features=96, out_features=24, bias=True)
+          )
+        )
+      )
+    )
+    (expand1): PatchExpansion(
+      (expansion): Linear(in_features=24, out_features=12, bias=False)
+      (shuffle): PixelShuffle(upscale_factor=2)
+    )
+    (output_activation): Sigmoid()
+  )
+  (common_quantizer): UniformQuantizer()
+  (individual_quantizer): UniformQuantizer()
+)

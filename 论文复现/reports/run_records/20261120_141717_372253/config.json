@@ -1,0 +1,49 @@
+{
+  "video": "data/videos/01.mp4",
+  "start_frame": 2273,
+  "device": "cuda",
+  "steps": 5000,
+  "resume": null,
+  "eval_every": 500,
+  "lr": 0.0001,
+  "seed": 42,
+  "output_root": "<CONQUERING_ROOT>/outputs/step14_spatial_probe",
+  "video_sha256": "37b7ee8559e55360dae2562819e8e4ee14bb022a8bba61a8e7ecef8be72af9ca",
+  "preprocessing": {
+    "original_hw": [
+      720,
+      960
+    ],
+    "resized_hw": [
+      192,
+      256
+    ],
+    "padding_tblr": [
+      32,
+      32,
+      0,
+      0
+    ]
+  },
+  "start_step": 0,
+  "parent_checkpoint_sha256": null,
+  "parameters": 434364,
+  "loss": "valid-area MSE only",
+  "detail_region": "lower half of valid image, fixed before training",
+  "detail_tlbr": [
+    128,
+    0,
+    224,
+    256
+  ],
+  "optimizer": "Adam",
+  "grad_clip": 1.0,
+  "latent_shape": [
+    1,
+    4,
+    72,
+    32,
+    32
+  ],
+  "note": "spatial-only, no quantization; not equal bitrate comparison"
+}

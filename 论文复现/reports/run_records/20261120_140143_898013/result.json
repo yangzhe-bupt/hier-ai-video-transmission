@@ -1,0 +1,22 @@
+{
+  "status": "completed",
+  "optimizer_updates": 5000,
+  "initial": {
+    "mse": 0.0013852627016603947,
+    "psnr_db": 28.584678590451706,
+    "detail_mse": 0.0012709553120657802,
+    "detail_psnr_db": 28.958697193629327
+  },
+  "final": {
+    "mse": 0.0003312913468107581,
+    "psnr_db": 34.797899075572715,
+    "detail_mse": 0.0003485888009890914,
+    "detail_psnr_db": 34.57686569454271
+  },
+  "start_step": 1000,
+  "updates_this_run": 4000,
+  "best_mse": 0.0003312913468107581,
+  "best_step": 5000,
+  "elapsed_seconds": 316.7308101672679,
+  "cuda_peak_allocated_mib": 812.392578125
+}

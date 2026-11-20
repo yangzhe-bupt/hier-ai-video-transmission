@@ -1,0 +1,561 @@
+{
+  "schema_version": 1,
+  "purpose": "single_video_pipeline_validation",
+  "video_path": "<CONQUERING_ROOT>/data/videos/new_year.mp4",
+  "video_sha256": "b407f83d58c66124d1e3f39be06cbeea9c31cd3531473a208c1eff64e9100d9d",
+  "decoded_frames": 531,
+  "reported_frames": 531,
+  "fps": 27.99805964483064,
+  "preprocessing": {
+    "original_hw": [
+      1088,
+      612
+    ],
+    "resized_hw": [
+      256,
+      144
+    ],
+    "padding_tblr": [
+      0,
+      0,
+      56,
+      56
+    ]
+  },
+  "canvas_size": 256,
+  "gop_length": 4,
+  "train_ratio": 0.8,
+  "gap_frames": 16,
+  "gap_range_start_stop": [
+    424,
+    440
+  ],
+  "unused_tail_start_stop": [
+    528,
+    531
+  ],
+  "splits": {
+    "train": [
+      {
+        "start": 0,
+        "stop": 4
+      },
+      {
+        "start": 4,
+        "stop": 8
+      },
+      {
+        "start": 8,
+        "stop": 12
+      },
+      {
+        "start": 12,
+        "stop": 16
+      },
+      {
+        "start": 16,
+        "stop": 20
+      },
+      {
+        "start": 20,
+        "stop": 24
+      },
+      {
+        "start": 24,
+        "stop": 28
+      },
+      {
+        "start": 28,
+        "stop": 32
+      },
+      {
+        "start": 32,
+        "stop": 36
+      },
+      {
+        "start": 36,
+        "stop": 40
+      },
+      {
+        "start": 40,
+        "stop": 44
+      },
+      {
+        "start": 44,
+        "stop": 48
+      },
+      {
+        "start": 48,
+        "stop": 52
+      },
+      {
+        "start": 52,
+        "stop": 56
+      },
+      {
+        "start": 56,
+        "stop": 60
+      },
+      {
+        "start": 60,
+        "stop": 64
+      },
+      {
+        "start": 64,
+        "stop": 68
+      },
+      {
+        "start": 68,
+        "stop": 72
+      },
+      {
+        "start": 72,
+        "stop": 76
+      },
+      {
+        "start": 76,
+        "stop": 80
+      },
+      {
+        "start": 80,
+        "stop": 84
+      },
+      {
+        "start": 84,
+        "stop": 88
+      },
+      {
+        "start": 88,
+        "stop": 92
+      },
+      {
+        "start": 92,
+        "stop": 96
+      },
+      {
+        "start": 96,
+        "stop": 100
+      },
+      {
+        "start": 100,
+        "stop": 104
+      },
+      {
+        "start": 104,
+        "stop": 108
+      },
+      {
+        "start": 108,
+        "stop": 112
+      },
+      {
+        "start": 112,
+        "stop": 116
+      },
+      {
+        "start": 116,
+        "stop": 120
+      },
+      {
+        "start": 120,
+        "stop": 124
+      },
+      {
+        "start": 124,
+        "stop": 128
+      },
+      {
+        "start": 128,
+        "stop": 132
+      },
+      {
+        "start": 132,
+        "stop": 136
+      },
+      {
+        "start": 136,
+        "stop": 140
+      },
+      {
+        "start": 140,
+        "stop": 144
+      },
+      {
+        "start": 144,
+        "stop": 148
+      },
+      {
+        "start": 148,
+        "stop": 152
+      },
+      {
+        "start": 152,
+        "stop": 156
+      },
+      {
+        "start": 156,
+        "stop": 160
+      },
+      {
+        "start": 160,
+        "stop": 164
+      },
+      {
+        "start": 164,
+        "stop": 168
+      },
+      {
+        "start": 168,
+        "stop": 172
+      },
+      {
+        "start": 172,
+        "stop": 176
+      },
+      {
+        "start": 176,
+        "stop": 180
+      },
+      {
+        "start": 180,
+        "stop": 184
+      },
+      {
+        "start": 184,
+        "stop": 188
+      },
+      {
+        "start": 188,
+        "stop": 192
+      },
+      {
+        "start": 192,
+        "stop": 196
+      },
+      {
+        "start": 196,
+        "stop": 200
+      },
+      {
+        "start": 200,
+        "stop": 204
+      },
+      {
+        "start": 204,
+        "stop": 208
+      },
+      {
+        "start": 208,
+        "stop": 212
+      },
+      {
+        "start": 212,
+        "stop": 216
+      },
+      {
+        "start": 216,
+        "stop": 220
+      },
+      {
+        "start": 220,
+        "stop": 224
+      },
+      {
+        "start": 224,
+        "stop": 228
+      },
+      {
+        "start": 228,
+        "stop": 232
+      },
+      {
+        "start": 232,
+        "stop": 236
+      },
+      {
+        "start": 236,
+        "stop": 240
+      },
+      {
+        "start": 240,
+        "stop": 244
+      },
+      {
+        "start": 244,
+        "stop": 248
+      },
+      {
+        "start": 248,
+        "stop": 252
+      },
+      {
+        "start": 252,
+        "stop": 256
+      },
+      {
+        "start": 256,
+        "stop": 260
+      },
+      {
+        "start": 260,
+        "stop": 264
+      },
+      {
+        "start": 264,
+        "stop": 268
+      },
+      {
+        "start": 268,
+        "stop": 272
+      },
+      {
+        "start": 272,
+        "stop": 276
+      },
+      {
+        "start": 276,
+        "stop": 280
+      },
+      {
+        "start": 280,
+        "stop": 284
+      },
+      {
+        "start": 284,
+        "stop": 288
+      },
+      {
+        "start": 288,
+        "stop": 292
+      },
+      {
+        "start": 292,
+        "stop": 296
+      },
+      {
+        "start": 296,
+        "stop": 300
+      },
+      {
+        "start": 300,
+        "stop": 304
+      },
+      {
+        "start": 304,
+        "stop": 308
+      },
+      {
+        "start": 308,
+        "stop": 312
+      },
+      {
+        "start": 312,
+        "stop": 316
+      },
+      {
+        "start": 316,
+        "stop": 320
+      },
+      {
+        "start": 320,
+        "stop": 324
+      },
+      {
+        "start": 324,
+        "stop": 328
+      },
+      {
+        "start": 328,
+        "stop": 332
+      },
+      {
+        "start": 332,
+        "stop": 336
+      },
+      {
+        "start": 336,
+        "stop": 340
+      },
+      {
+        "start": 340,
+        "stop": 344
+      },
+      {
+        "start": 344,
+        "stop": 348
+      },
+      {
+        "start": 348,
+        "stop": 352
+      },
+      {
+        "start": 352,
+        "stop": 356
+      },
+      {
+        "start": 356,
+        "stop": 360
+      },
+      {
+        "start": 360,
+        "stop": 364
+      },
+      {
+        "start": 364,
+        "stop": 368
+      },
+      {
+        "start": 368,
+        "stop": 372
+      },
+      {
+        "start": 372,
+        "stop": 376
+      },
+      {
+        "start": 376,
+        "stop": 380
+      },
+      {
+        "start": 380,
+        "stop": 384
+      },
+      {
+        "start": 384,
+        "stop": 388
+      },
+      {
+        "start": 388,
+        "stop": 392
+      },
+      {
+        "start": 392,
+        "stop": 396
+      },
+      {
+        "start": 396,
+        "stop": 400
+      },
+      {
+        "start": 400,
+        "stop": 404
+      },
+      {
+        "start": 404,
+        "stop": 408
+      },
+      {
+        "start": 408,
+        "stop": 412
+      },
+      {
+        "start": 412,
+        "stop": 416
+      },
+      {
+        "start": 416,
+        "stop": 420
+      },
+      {
+        "start": 420,
+        "stop": 424
+      }
+    ],
+    "val": [
+      {
+        "start": 440,
+        "stop": 444
+      },
+      {
+        "start": 444,
+        "stop": 448
+      },
+      {
+        "start": 448,
+        "stop": 452
+      },
+      {
+        "start": 452,
+        "stop": 456
+      },
+      {
+        "start": 456,
+        "stop": 460
+      },
+      {
+        "start": 460,
+        "stop": 464
+      },
+      {
+        "start": 464,
+        "stop": 468
+      },
+      {
+        "start": 468,
+        "stop": 472
+      },
+      {
+        "start": 472,
+        "stop": 476
+      },
+      {
+        "start": 476,
+        "stop": 480
+      },
+      {
+        "start": 480,
+        "stop": 484
+      },
+      {
+        "start": 484,
+        "stop": 488
+      },
+      {
+        "start": 488,
+        "stop": 492
+      },
+      {
+        "start": 492,
+        "stop": 496
+      },
+      {
+        "start": 496,
+        "stop": 500
+      },
+      {
+        "start": 500,
+        "stop": 504
+      },
+      {
+        "start": 504,
+        "stop": 508
+      },
+      {
+        "start": 508,
+        "stop": 512
+      },
+      {
+        "start": 512,
+        "stop": 516
+      },
+      {
+        "start": 516,
+        "stop": 520
+      },
+      {
+        "start": 520,
+        "stop": 524
+      },
+      {
+        "start": 524,
+        "stop": 528
+      }
+    ]
+  },
+  "cache_sha256": "abdc1bc0d50d7b9736a8c3fafb60f567c48ea4a65e69f48a6acdae76bdbe0619",
+  "cache_dtype": "uint8",
+  "cache_layout": "TCHW",
+  "torch": "2.0.1+cu117",
+  "opencv": "4.10.0",
+  "note": "同一视频的时间段验证；非跨视频测试。后续模型须随机初始化，不能加载单GOP拟合权重。"
+}

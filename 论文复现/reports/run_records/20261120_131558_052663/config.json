@@ -1,0 +1,44 @@
+{
+  "checkpoint": "outputs/step12_multi_runs/20261119_235121_681068/last.pt",
+  "data_dir": "data/multi_gop/20261119_225658_378351",
+  "device": "cuda",
+  "epochs": 10,
+  "lr": 0.0001,
+  "aux_weight": 0.01,
+  "feature_weight": 0.1,
+  "seed": 42,
+  "smoke": false,
+  "output_root": "<CONQUERING_ROOT>/outputs/step13_stage2_runs",
+  "stage1_checkpoint_sha256": "592681515eed72e91c900d5d6c6cc7083cb18af931537831bab4562b64fee7fe",
+  "variant": "common_fig7",
+  "train_gops": 106,
+  "val_gops": 22,
+  "batch_size": 1,
+  "packet_size": 16,
+  "train_probabilities": [
+    0,
+    0.3,
+    0.6,
+    0.9
+  ],
+  "validation_probabilities": [
+    0.0,
+    0.25,
+    0.5,
+    0.9
+  ],
+  "validation_seed": 42,
+  "frozen_modules": [
+    "spatial_encoder",
+    "temporal_encoder",
+    "common_extractor",
+    "individual_extractor",
+    "common_quantizer",
+    "individual_quantizer"
+  ],
+  "quantization": "eval rounding",
+  "feature_target": "quantized transmitted features",
+  "feature_reduction": "sum of whole-branch MSE means",
+  "selection": "equal mean of four validation MSEs",
+  "trainable_parameters": 3185363
+}

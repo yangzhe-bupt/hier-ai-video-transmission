@@ -1,0 +1,410 @@
+{
+  "threshold_db": 27.0,
+  "threshold_source": "user acceptance of fixed animation GOP",
+  "source_run": ".\\outputs\\20261120_183538_473891",
+  "source_sha256": "4f28a5c2be15249bab4f39f88170937c7445b8a5d37e37a736d895cd824b7ee1",
+  "final": {
+    "epoch": 10,
+    "gops": 1137,
+    "passed_gops": 54,
+    "failed_gops": 1083,
+    "gop_pass_rate": 0.047493403693931395,
+    "frame_coverage_rate": 0.04728392346602155,
+    "pooled_mse": 0.006050699659132556,
+    "pooled_psnr_db": 22.18194403772022,
+    "minimum_psnr_db": 16.658753672239843,
+    "p10_psnr_db": 19.945494833269827,
+    "median_psnr_db": 22.772374657031385,
+    "maximum_psnr_db": 31.733937657979094
+  },
+  "epoch_history": [
+    {
+      "epoch": 0,
+      "gops": 1137,
+      "passed_gops": 41,
+      "failed_gops": 1096,
+      "gop_pass_rate": 0.03605980650835532,
+      "frame_coverage_rate": 0.03584781174400704,
+      "pooled_mse": 0.04299440039250989,
+      "pooled_psnr_db": 13.665881034202114,
+      "minimum_psnr_db": 7.977920662393374,
+      "p10_psnr_db": 11.233887188784806,
+      "median_psnr_db": 13.899954354383413,
+      "maximum_psnr_db": 38.4462083848029
+    },
+    {
+      "epoch": 1,
+      "gops": 1137,
+      "passed_gops": 22,
+      "failed_gops": 1115,
+      "gop_pass_rate": 0.019349164467897976,
+      "frame_coverage_rate": 0.01913349461183198,
+      "pooled_mse": 0.013479925613430062,
+      "pooled_psnr_db": 18.703125043708763,
+      "minimum_psnr_db": 12.194776446201544,
+      "p10_psnr_db": 16.835421777506806,
+      "median_psnr_db": 18.919741299262256,
+      "maximum_psnr_db": 29.93812772226351
+    },
+    {
+      "epoch": 2,
+      "gops": 1137,
+      "passed_gops": 22,
+      "failed_gops": 1115,
+      "gop_pass_rate": 0.019349164467897976,
+      "frame_coverage_rate": 0.01913349461183198,
+      "pooled_mse": 0.010846328503844576,
+      "pooled_psnr_db": 19.647172461806235,
+      "minimum_psnr_db": 9.474336004818763,
+      "p10_psnr_db": 17.74856212064012,
+      "median_psnr_db": 20.02685633629126,
+      "maximum_psnr_db": 30.62848160996493
+    },
+    {
+      "epoch": 3,
+      "gops": 1137,
+      "passed_gops": 22,
+      "failed_gops": 1115,
+      "gop_pass_rate": 0.019349164467897976,
+      "frame_coverage_rate": 0.01913349461183198,
+      "pooled_mse": 0.011981008121301795,
+      "pooled_psnr_db": 19.21506637447703,
+      "minimum_psnr_db": 10.772001623094255,
+      "p10_psnr_db": 17.419970111544473,
+      "median_psnr_db": 19.60272539220446,
+      "maximum_psnr_db": 29.336555788408614
+    },
+    {
+      "epoch": 4,
+      "gops": 1137,
+      "passed_gops": 22,
+      "failed_gops": 1115,
+      "gop_pass_rate": 0.019349164467897976,
+      "frame_coverage_rate": 0.01913349461183198,
+      "pooled_mse": 0.009323080651548512,
+      "pooled_psnr_db": 20.30440558794176,
+      "minimum_psnr_db": 9.348757199065531,
+      "p10_psnr_db": 18.339614775807622,
+      "median_psnr_db": 20.824103713729244,
+      "maximum_psnr_db": 28.672406541682744
+    },
+    {
+      "epoch": 5,
+      "gops": 1137,
+      "passed_gops": 33,
+      "failed_gops": 1104,
+      "gop_pass_rate": 0.029023746701846966,
+      "frame_coverage_rate": 0.028810204530459644,
+      "pooled_mse": 0.007853016566719892,
+      "pooled_psnr_db": 21.049634863592853,
+      "minimum_psnr_db": 15.659162471498782,
+      "p10_psnr_db": 18.93526861452132,
+      "median_psnr_db": 21.526503405982865,
+      "maximum_psnr_db": 31.27723168405752
+    },
+    {
+      "epoch": 6,
+      "gops": 1137,
+      "passed_gops": 24,
+      "failed_gops": 1113,
+      "gop_pass_rate": 0.021108179419525065,
+      "frame_coverage_rate": 0.020892896415218826,
+      "pooled_mse": 0.00759689643526059,
+      "pooled_psnr_db": 21.193637940776714,
+      "minimum_psnr_db": 15.033136326585447,
+      "p10_psnr_db": 19.137645197658564,
+      "median_psnr_db": 21.645412769331664,
+      "maximum_psnr_db": 31.74581155621411
+    },
+    {
+      "epoch": 7,
+      "gops": 1137,
+      "passed_gops": 24,
+      "failed_gops": 1113,
+      "gop_pass_rate": 0.021108179419525065,
+      "frame_coverage_rate": 0.020892896415218826,
+      "pooled_mse": 0.006992523718160055,
+      "pooled_psnr_db": 21.553660518568908,
+      "minimum_psnr_db": 12.412923958871565,
+      "p10_psnr_db": 19.440347717837486,
+      "median_psnr_db": 22.062949811495812,
+      "maximum_psnr_db": 32.1237966498462
+    },
+    {
+      "epoch": 8,
+      "gops": 1137,
+      "passed_gops": 50,
+      "failed_gops": 1087,
+      "gop_pass_rate": 0.04397537379067722,
+      "frame_coverage_rate": 0.04376511985924786,
+      "pooled_mse": 0.006675969631918478,
+      "pooled_psnr_db": 21.754856475350657,
+      "minimum_psnr_db": 13.364240485951655,
+      "p10_psnr_db": 19.614081160874612,
+      "median_psnr_db": 22.278360165765463,
+      "maximum_psnr_db": 32.2537921749103
+    },
+    {
+      "epoch": 9,
+      "gops": 1137,
+      "passed_gops": 22,
+      "failed_gops": 1115,
+      "gop_pass_rate": 0.019349164467897976,
+      "frame_coverage_rate": 0.01913349461183198,
+      "pooled_mse": 0.007424546877274132,
+      "pooled_psnr_db": 21.293300463480413,
+      "minimum_psnr_db": 14.641158347066503,
+      "p10_psnr_db": 19.1879147439475,
+      "median_psnr_db": 21.75249143561191,
+      "maximum_psnr_db": 29.271024326003577
+    },
+    {
+      "epoch": 10,
+      "gops": 1137,
+      "passed_gops": 54,
+      "failed_gops": 1083,
+      "gop_pass_rate": 0.047493403693931395,
+      "frame_coverage_rate": 0.04728392346602155,
+      "pooled_mse": 0.006050699659132556,
+      "pooled_psnr_db": 22.18194403772022,
+      "minimum_psnr_db": 16.658753672239843,
+      "p10_psnr_db": 19.945494833269827,
+      "median_psnr_db": 22.772374657031385,
+      "maximum_psnr_db": 31.733937657979094
+    }
+  ],
+  "worst20": [
+    {
+      "start_frame": 3000,
+      "stop_frame": 3004,
+      "mse": 0.021583637222647667,
+      "psnr_db": 16.658753672239843,
+      "passes": false,
+      "detail_psnr_db": 17.008305027959796,
+      "start_seconds": 50.979048456858,
+      "stop_seconds": 51.04702052146715
+    },
+    {
+      "start_frame": 1608,
+      "stop_frame": 1612,
+      "mse": 0.020627707242965698,
+      "psnr_db": 16.855490409102114,
+      "passes": false,
+      "detail_psnr_db": 16.580153608685723,
+      "start_seconds": 27.324769972875888,
+      "stop_seconds": 27.392742037485032
+    },
+    {
+      "start_frame": 3004,
+      "stop_frame": 3008,
+      "mse": 0.01892327144742012,
+      "psnr_db": 17.230037807913025,
+      "passes": false,
+      "detail_psnr_db": 17.340692844398877,
+      "start_seconds": 51.04702052146715,
+      "stop_seconds": 51.11499258607629
+    },
+    {
+      "start_frame": 3008,
+      "stop_frame": 3012,
+      "mse": 0.018101053312420845,
+      "psnr_db": 17.422961525085924,
+      "passes": false,
+      "detail_psnr_db": 17.619239615287153,
+      "start_seconds": 51.11499258607629,
+      "stop_seconds": 51.182964650685435
+    },
+    {
+      "start_frame": 1736,
+      "stop_frame": 1740,
+      "mse": 0.017372995615005493,
+      "psnr_db": 17.601252899641374,
+      "passes": false,
+      "detail_psnr_db": 17.369341422878342,
+      "start_seconds": 29.499876040368495,
+      "stop_seconds": 29.56784810497764
+    },
+    {
+      "start_frame": 2996,
+      "stop_frame": 3000,
+      "mse": 0.0172434039413929,
+      "psnr_db": 17.633769979637098,
+      "passes": false,
+      "detail_psnr_db": 17.88963645506965,
+      "start_seconds": 50.91107639224886,
+      "stop_seconds": 50.979048456858
+    },
+    {
+      "start_frame": 940,
+      "stop_frame": 944,
+      "mse": 0.01718459464609623,
+      "psnr_db": 17.648607076373104,
+      "passes": false,
+      "detail_psnr_db": 16.294310192990142,
+      "start_seconds": 15.97343518314884,
+      "stop_seconds": 16.041407247757984
+    },
+    {
+      "start_frame": 936,
+      "stop_frame": 940,
+      "mse": 0.016891298815608025,
+      "psnr_db": 17.72336955120248,
+      "passes": false,
+      "detail_psnr_db": 16.512081740942776,
+      "start_seconds": 15.905463118539696,
+      "stop_seconds": 15.97343518314884
+    },
+    {
+      "start_frame": 404,
+      "stop_frame": 408,
+      "mse": 0.01654907688498497,
+      "psnr_db": 17.81226226355832,
+      "passes": false,
+      "detail_psnr_db": 17.435732582661878,
+      "start_seconds": 6.865178525523544,
+      "stop_seconds": 6.933150590132688
+    },
+    {
+      "start_frame": 1060,
+      "stop_frame": 1064,
+      "mse": 0.016000036150217056,
+      "psnr_db": 17.95879036105197,
+      "passes": false,
+      "detail_psnr_db": 16.410410979065524,
+      "start_seconds": 18.01259712142316,
+      "stop_seconds": 18.080569186032303
+    },
+    {
+      "start_frame": 1064,
+      "stop_frame": 1068,
+      "mse": 0.01582654006779194,
+      "psnr_db": 18.006140184101046,
+      "passes": false,
+      "detail_psnr_db": 16.443352390137317,
+      "start_seconds": 18.080569186032303,
+      "stop_seconds": 18.148541250641447
+    },
+    {
+      "start_frame": 932,
+      "stop_frame": 936,
+      "mse": 0.0151774687692523,
+      "psnr_db": 18.188006521038584,
+      "passes": false,
+      "detail_psnr_db": 17.254059806714398,
+      "start_seconds": 15.837491053930552,
+      "stop_seconds": 15.905463118539696
+    },
+    {
+      "start_frame": 84,
+      "stop_frame": 88,
+      "mse": 0.015044216066598892,
+      "psnr_db": 18.226304378222405,
+      "passes": false,
+      "detail_psnr_db": 18.69077833075115,
+      "start_seconds": 1.427413356792024,
+      "stop_seconds": 1.495385421401168
+    },
+    {
+      "start_frame": 1056,
+      "stop_frame": 1060,
+      "mse": 0.014895041473209858,
+      "psnr_db": 18.26958283213549,
+      "passes": false,
+      "detail_psnr_db": 16.76977102522196,
+      "start_seconds": 17.944625056814015,
+      "stop_seconds": 18.01259712142316
+    },
+    {
+      "start_frame": 1032,
+      "stop_frame": 1036,
+      "mse": 0.014216732233762741,
+      "psnr_db": 18.472002162598002,
+      "passes": false,
+      "detail_psnr_db": 16.762642176280647,
+      "start_seconds": 17.53679266915915,
+      "stop_seconds": 17.604764733768295
+    },
+    {
+      "start_frame": 1740,
+      "stop_frame": 1744,
+      "mse": 0.014163578860461712,
+      "psnr_db": 18.48826995024398,
+      "passes": false,
+      "detail_psnr_db": 18.03939327892499,
+      "start_seconds": 29.56784810497764,
+      "stop_seconds": 29.635820169586783
+    },
+    {
+      "start_frame": 1052,
+      "stop_frame": 1056,
+      "mse": 0.014081982895731926,
+      "psnr_db": 18.513361875205156,
+      "passes": false,
+      "detail_psnr_db": 16.85866689134332,
+      "start_seconds": 17.87665299220487,
+      "stop_seconds": 17.944625056814015
+    },
+    {
+      "start_frame": 488,
+      "stop_frame": 492,
+      "mse": 0.014038407243788242,
+      "psnr_db": 18.526821631800633,
+      "passes": false,
+      "detail_psnr_db": 17.329350150099817,
+      "start_seconds": 8.292591882315568,
+      "stop_seconds": 8.360563946924712
+    },
+    {
+      "start_frame": 1036,
+      "stop_frame": 1040,
+      "mse": 0.013872625306248665,
+      "psnr_db": 18.578413436760552,
+      "passes": false,
+      "detail_psnr_db": 17.09091156810834,
+      "start_seconds": 17.604764733768295,
+      "stop_seconds": 17.67273679837744
+    },
+    {
+      "start_frame": 1612,
+      "stop_frame": 1616,
+      "mse": 0.013783005066215992,
+      "psnr_db": 18.60656084214073,
+      "passes": false,
+      "detail_psnr_db": 18.387318277633582,
+      "start_seconds": 27.392742037485032,
+      "stop_seconds": 27.460714102094176
+    }
+  ],
+  "failed_intervals": [
+    {
+      "start_frame": 0,
+      "stop_frame": 1688,
+      "gops": 422,
+      "start_seconds": 0.0,
+      "stop_seconds": 28.684211265058767
+    },
+    {
+      "start_frame": 1696,
+      "stop_frame": 3252,
+      "gops": 389,
+      "start_seconds": 28.820155394277055,
+      "stop_seconds": 55.26128852723407
+    },
+    {
+      "start_frame": 3268,
+      "stop_frame": 3784,
+      "gops": 129,
+      "start_seconds": 55.53317678567065,
+      "stop_seconds": 64.30157312025023
+    },
+    {
+      "start_frame": 3888,
+      "stop_frame": 4460,
+      "gops": 143,
+      "start_seconds": 66.06884680008797,
+      "stop_seconds": 75.78885203919556
+    }
+  ],
+  "interpretation": "frame coverage uses GOP pass/fail; times use mean FPS; this is training-set quality, not generalization",
+  "optimizer_updates": 0
+}

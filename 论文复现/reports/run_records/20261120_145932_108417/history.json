@@ -1,0 +1,90 @@
+[
+  {
+    "epoch": 0,
+    "updates": 0,
+    "mean_mse": 0.10665522702038288,
+    "pooled_psnr_db": 9.720178555405552,
+    "worst_gop_psnr_db": 7.470803667831736,
+    "elapsed_seconds": 22.611681884154677
+  },
+  {
+    "epoch": 50,
+    "updates": 400,
+    "mean_mse": 0.025893114041537046,
+    "pooled_psnr_db": 15.868157158946499,
+    "worst_gop_psnr_db": 14.313968735745242,
+    "elapsed_seconds": 120.52427368797362
+  },
+  {
+    "epoch": 100,
+    "updates": 800,
+    "mean_mse": 0.016749497852288187,
+    "pooled_psnr_db": 17.759982085226174,
+    "worst_gop_psnr_db": 16.35804999159754,
+    "elapsed_seconds": 219.96679385006428
+  },
+  {
+    "epoch": 150,
+    "updates": 1200,
+    "mean_mse": 0.01366007816977799,
+    "pooled_psnr_db": 18.64546815397817,
+    "worst_gop_psnr_db": 16.857710210687546,
+    "elapsed_seconds": 321.071746872738
+  },
+  {
+    "epoch": 200,
+    "updates": 1600,
+    "mean_mse": 0.009417892259079963,
+    "pooled_psnr_db": 20.26046282204476,
+    "worst_gop_psnr_db": 18.81084243210062,
+    "elapsed_seconds": 419.6556017436087
+  },
+  {
+    "epoch": 250,
+    "updates": 2000,
+    "mean_mse": 0.008365398971363902,
+    "pooled_psnr_db": 20.7751334138063,
+    "worst_gop_psnr_db": 19.373649327222093,
+    "elapsed_seconds": 519.2784649636596
+  },
+  {
+    "epoch": 300,
+    "updates": 2400,
+    "mean_mse": 0.00720390654169023,
+    "pooled_psnr_db": 21.424319300406637,
+    "worst_gop_psnr_db": 19.881737389324513,
+    "elapsed_seconds": 618.8876572027802
+  },
+  {
+    "epoch": 350,
+    "updates": 2800,
+    "mean_mse": 0.006820481765316799,
+    "pooled_psnr_db": 21.66184947831928,
+    "worst_gop_psnr_db": 20.320898151883654,
+    "elapsed_seconds": 718.032757697627
+  },
+  {
+    "epoch": 400,
+    "updates": 3200,
+    "mean_mse": 0.005841461039381102,
+    "pooled_psnr_db": 22.33478515561803,
+    "worst_gop_psnr_db": 20.9447214033927,
+    "elapsed_seconds": 815.6203499305993
+  },
+  {
+    "epoch": 450,
+    "updates": 3600,
+    "mean_mse": 0.0057597122504375875,
+    "pooled_psnr_db": 22.39599212960245,
+    "worst_gop_psnr_db": 20.95075211537551,
+    "elapsed_seconds": 914.1289517600089
+  },
+  {
+    "epoch": 500,
+    "updates": 4000,
+    "mean_mse": 0.005040153570007533,
+    "pooled_psnr_db": 22.975562306991616,
+    "worst_gop_psnr_db": 21.650367216098118,
+    "elapsed_seconds": 1013.0375990886241
+  }
+]

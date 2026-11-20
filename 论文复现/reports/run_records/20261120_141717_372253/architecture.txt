@@ -1,0 +1,258 @@
+SpatialOnly(
+  (encoder): SpatialEncoder(
+    (patch_embed): PatchEmbedding(
+      (conv): Conv2d(3, 24, kernel_size=(2, 2), stride=(2, 2))
+    )
+    (stage1): SwinBlockPair(
+      (regular_block): SpatialWindowBlock(
+        (block): WindowTransformerBlock(
+          (norm1): LayerNorm((24,), eps=1e-05, elementwise_affine=True)
+          (attention): WindowAttention(
+            (qkv): WindowQKV(
+              (qkv): Linear(in_features=24, out_features=72, bias=True)
+            )
+            (relative_position_bias): RelativePositionBias()
+            (proj): Linear(in_features=24, out_features=24, bias=True)
+          )
+          (norm2): LayerNorm((24,), eps=1e-05, elementwise_affine=True)
+          (mlp): Sequential(
+            (0): Linear(in_features=24, out_features=96, bias=True)
+            (1): GELU(approximate='none')
+            (2): Linear(in_features=96, out_features=24, bias=True)
+          )
+        )
+      )
+      (shifted_block): ShiftedWindowBlock(
+        (block): WindowTransformerBlock(
+          (norm1): LayerNorm((24,), eps=1e-05, elementwise_affine=True)
+          (attention): WindowAttention(
+            (qkv): WindowQKV(
+              (qkv): Linear(in_features=24, out_features=72, bias=True)
+            )
+            (relative_position_bias): RelativePositionBias()
+            (proj): Linear(in_features=24, out_features=24, bias=True)
+          )
+          (norm2): LayerNorm((24,), eps=1e-05, elementwise_affine=True)
+          (mlp): Sequential(
+            (0): Linear(in_features=24, out_features=96, bias=True)
+            (1): GELU(approximate='none')
+            (2): Linear(in_features=96, out_features=24, bias=True)
+          )
+        )
+      )
+    )
+    (merge1): PatchMerging(
+      (norm): LayerNorm((96,), eps=1e-05, elementwise_affine=True)
+      (reduction): Linear(in_features=96, out_features=48, bias=False)
+    )
+    (stage2): SwinBlockPair(
+      (regular_block): SpatialWindowBlock(
+        (block): WindowTransformerBlock(
+          (norm1): LayerNorm((48,), eps=1e-05, elementwise_affine=True)
+          (attention): WindowAttention(
+            (qkv): WindowQKV(
+              (qkv): Linear(in_features=48, out_features=144, bias=True)
+            )
+            (relative_position_bias): RelativePositionBias()
+            (proj): Linear(in_features=48, out_features=48, bias=True)
+          )
+          (norm2): LayerNorm((48,), eps=1e-05, elementwise_affine=True)
+          (mlp): Sequential(
+            (0): Linear(in_features=48, out_features=192, bias=True)
+            (1): GELU(approximate='none')
+            (2): Linear(in_features=192, out_features=48, bias=True)
+          )
+        )
+      )
+      (shifted_block): ShiftedWindowBlock(
+        (block): WindowTransformerBlock(
+          (norm1): LayerNorm((48,), eps=1e-05, elementwise_affine=True)
+          (attention): WindowAttention(
+            (qkv): WindowQKV(
+              (qkv): Linear(in_features=48, out_features=144, bias=True)
+            )
+            (relative_position_bias): RelativePositionBias()
+            (proj): Linear(in_features=48, out_features=48, bias=True)
+          )
+          (norm2): LayerNorm((48,), eps=1e-05, elementwise_affine=True)
+          (mlp): Sequential(
+            (0): Linear(in_features=48, out_features=192, bias=True)
+            (1): GELU(approximate='none')
+            (2): Linear(in_features=192, out_features=48, bias=True)
+          )
+        )
+      )
+    )
+    (merge2): PatchMerging(
+      (norm): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+      (reduction): Linear(in_features=192, out_features=72, bias=False)
+    )
+    (stage3): SwinBlockPair(
+      (regular_block): SpatialWindowBlock(
+        (block): WindowTransformerBlock(
+          (norm1): LayerNorm((72,), eps=1e-05, elementwise_affine=True)
+          (attention): WindowAttention(
+            (qkv): WindowQKV(
+              (qkv): Linear(in_features=72, out_features=216, bias=True)
+            )
+            (relative_position_bias): RelativePositionBias()
+            (proj): Linear(in_features=72, out_features=72, bias=True)
+          )
+          (norm2): LayerNorm((72,), eps=1e-05, elementwise_affine=True)
+          (mlp): Sequential(
+            (0): Linear(in_features=72, out_features=288, bias=True)
+            (1): GELU(approximate='none')
+            (2): Linear(in_features=288, out_features=72, bias=True)
+          )
+        )
+      )
+      (shifted_block): ShiftedWindowBlock(
+        (block): WindowTransformerBlock(
+          (norm1): LayerNorm((72,), eps=1e-05, elementwise_affine=True)
+          (attention): WindowAttention(
+            (qkv): WindowQKV(
+              (qkv): Linear(in_features=72, out_features=216, bias=True)
+            )
+            (relative_position_bias): RelativePositionBias()
+            (proj): Linear(in_features=72, out_features=72, bias=True)
+          )
+          (norm2): LayerNorm((72,), eps=1e-05, elementwise_affine=True)
+          (mlp): Sequential(
+            (0): Linear(in_features=72, out_features=288, bias=True)
+            (1): GELU(approximate='none')
+            (2): Linear(in_features=288, out_features=72, bias=True)
+          )
+        )
+      )
+    )
+  )
+  (decoder): SpatialDecoder(
+    (stage3): SwinBlockPair(
+      (regular_block): SpatialWindowBlock(
+        (block): WindowTransformerBlock(
+          (norm1): LayerNorm((72,), eps=1e-05, elementwise_affine=True)
+          (attention): WindowAttention(
+            (qkv): WindowQKV(
+              (qkv): Linear(in_features=72, out_features=216, bias=True)
+            )
+            (relative_position_bias): RelativePositionBias()
+            (proj): Linear(in_features=72, out_features=72, bias=True)
+          )
+          (norm2): LayerNorm((72,), eps=1e-05, elementwise_affine=True)
+          (mlp): Sequential(
+            (0): Linear(in_features=72, out_features=288, bias=True)
+            (1): GELU(approximate='none')
+            (2): Linear(in_features=288, out_features=72, bias=True)
+          )
+        )
+      )
+      (shifted_block): ShiftedWindowBlock(
+        (block): WindowTransformerBlock(
+          (norm1): LayerNorm((72,), eps=1e-05, elementwise_affine=True)
+          (attention): WindowAttention(
+            (qkv): WindowQKV(
+              (qkv): Linear(in_features=72, out_features=216, bias=True)
+            )
+            (relative_position_bias): RelativePositionBias()
+            (proj): Linear(in_features=72, out_features=72, bias=True)
+          )
+          (norm2): LayerNorm((72,), eps=1e-05, elementwise_affine=True)
+          (mlp): Sequential(
+            (0): Linear(in_features=72, out_features=288, bias=True)
+            (1): GELU(approximate='none')
+            (2): Linear(in_features=288, out_features=72, bias=True)
+          )
+        )
+      )
+    )
+    (expand3): PatchExpansion(
+      (expansion): Linear(in_features=72, out_features=192, bias=False)
+      (shuffle): PixelShuffle(upscale_factor=2)
+    )
+    (stage2): SwinBlockPair(
+      (regular_block): SpatialWindowBlock(
+        (block): WindowTransformerBlock(
+          (norm1): LayerNorm((48,), eps=1e-05, elementwise_affine=True)
+          (attention): WindowAttention(
+            (qkv): WindowQKV(
+              (qkv): Linear(in_features=48, out_features=144, bias=True)
+            )
+            (relative_position_bias): RelativePositionBias()
+            (proj): Linear(in_features=48, out_features=48, bias=True)
+          )
+          (norm2): LayerNorm((48,), eps=1e-05, elementwise_affine=True)
+          (mlp): Sequential(
+            (0): Linear(in_features=48, out_features=192, bias=True)
+            (1): GELU(approximate='none')
+            (2): Linear(in_features=192, out_features=48, bias=True)
+          )
+        )
+      )
+      (shifted_block): ShiftedWindowBlock(
+        (block): WindowTransformerBlock(
+          (norm1): LayerNorm((48,), eps=1e-05, elementwise_affine=True)
+          (attention): WindowAttention(
+            (qkv): WindowQKV(
+              (qkv): Linear(in_features=48, out_features=144, bias=True)
+            )
+            (relative_position_bias): RelativePositionBias()
+            (proj): Linear(in_features=48, out_features=48, bias=True)
+          )
+          (norm2): LayerNorm((48,), eps=1e-05, elementwise_affine=True)
+          (mlp): Sequential(
+            (0): Linear(in_features=48, out_features=192, bias=True)
+            (1): GELU(approximate='none')
+            (2): Linear(in_features=192, out_features=48, bias=True)
+          )
+        )
+      )
+    )
+    (expand2): PatchExpansion(
+      (expansion): Linear(in_features=48, out_features=96, bias=False)
+      (shuffle): PixelShuffle(upscale_factor=2)
+    )
+    (stage1): SwinBlockPair(
+      (regular_block): SpatialWindowBlock(
+        (block): WindowTransformerBlock(
+          (norm1): LayerNorm((24,), eps=1e-05, elementwise_affine=True)
+          (attention): WindowAttention(
+            (qkv): WindowQKV(
+              (qkv): Linear(in_features=24, out_features=72, bias=True)
+            )
+            (relative_position_bias): RelativePositionBias()
+            (proj): Linear(in_features=24, out_features=24, bias=True)
+          )
+          (norm2): LayerNorm((24,), eps=1e-05, elementwise_affine=True)
+          (mlp): Sequential(
+            (0): Linear(in_features=24, out_features=96, bias=True)
+            (1): GELU(approximate='none')
+            (2): Linear(in_features=96, out_features=24, bias=True)
+          )
+        )
+      )
+      (shifted_block): ShiftedWindowBlock(
+        (block): WindowTransformerBlock(
+          (norm1): LayerNorm((24,), eps=1e-05, elementwise_affine=True)
+          (attention): WindowAttention(
+            (qkv): WindowQKV(
+              (qkv): Linear(in_features=24, out_features=72, bias=True)
+            )
+            (relative_position_bias): RelativePositionBias()
+            (proj): Linear(in_features=24, out_features=24, bias=True)
+          )
+          (norm2): LayerNorm((24,), eps=1e-05, elementwise_affine=True)
+          (mlp): Sequential(
+            (0): Linear(in_features=24, out_features=96, bias=True)
+            (1): GELU(approximate='none')
+            (2): Linear(in_features=96, out_features=24, bias=True)
+          )
+        )
+      )
+    )
+    (expand1): PatchExpansion(
+      (expansion): Linear(in_features=24, out_features=12, bias=False)
+      (shuffle): PixelShuffle(upscale_factor=2)
+    )
+    (output_activation): Sigmoid()
+  )
+)

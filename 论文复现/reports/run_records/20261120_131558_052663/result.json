@@ -1,0 +1,41 @@
+{
+  "status": "completed",
+  "smoke": false,
+  "epoch": 10,
+  "optimizer_updates": 1060,
+  "best_mean_val_mse": 0.014576041396664194,
+  "best_epoch": 8,
+  "final": [
+    {
+      "epoch": 10,
+      "p": 0.0,
+      "mse": 0.010579048535222027,
+      "psnr_db": 19.75553390380632,
+      "actual_loss": 0.0
+    },
+    {
+      "epoch": 10,
+      "p": 0.25,
+      "mse": 0.011402603676661158,
+      "psnr_db": 19.429959703041128,
+      "actual_loss": 0.2546057162534435
+    },
+    {
+      "epoch": 10,
+      "p": 0.5,
+      "mse": 0.013027422111437606,
+      "psnr_db": 18.85141514720324,
+      "actual_loss": 0.5036587465564738
+    },
+    {
+      "epoch": 10,
+      "p": 0.9,
+      "mse": 0.03271281956443507,
+      "psnr_db": 14.85282021802796,
+      "actual_loss": 0.9021608126721763
+    }
+  ],
+  "frozen_parameters_unchanged": true,
+  "elapsed_seconds": 263.56614699214697,
+  "cuda_peak_allocated_mib": 515.5185546875
+}

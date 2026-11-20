@@ -1,0 +1,56 @@
+[
+  {
+    "path": ".\\data\\01.mp4",
+    "bytes": 16107352,
+    "width": 960,
+    "height": 720,
+    "fps": 58.84770490643441,
+    "metadata_frames": 4547,
+    "duration_seconds": 77.26724444444444,
+    "preview_indices": [
+      227,
+      1136,
+      2273,
+      3409,
+      4318
+    ],
+    "sha256": "37b7ee8559e55360dae2562819e8e4ee14bb022a8bba61a8e7ecef8be72af9ca",
+    "note": "preview uses indexed seeking; metadata frame count not yet verified by full sequential decode"
+  },
+  {
+    "path": ".\\data\\02.mp4",
+    "bytes": 34738211,
+    "width": 960,
+    "height": 720,
+    "fps": 29.96901457084075,
+    "metadata_frames": 4924,
+    "duration_seconds": 164.30303333333333,
+    "preview_indices": [
+      246,
+      1230,
+      2461,
+      3692,
+      4676
+    ],
+    "sha256": "fd99bfae7a754d647159bdbfee3379f82dcb4f905f88e8ccb138577af1ebdb32",
+    "note": "preview uses indexed seeking; metadata frame count not yet verified by full sequential decode"
+  },
+  {
+    "path": ".\\data\\03.mp4",
+    "bytes": 36168262,
+    "width": 960,
+    "height": 720,
+    "fps": 59.48752720602698,
+    "metadata_frames": 10333,
+    "duration_seconds": 173.70027777777779,
+    "preview_indices": [
+      516,
+      2583,
+      5166,
+      7749,
+      9815
+    ],
+    "sha256": "9f7da1b9a418e94cb9e831eaeacdd5c7adac39543a70db858e1986d977423223",
+    "note": "preview uses indexed seeking; metadata frame count not yet verified by full sequential decode"
+  }
+]

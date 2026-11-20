@@ -1,0 +1,35 @@
+{
+  "status": "completed",
+  "partial": false,
+  "checkpoint_epoch": 4750,
+  "output_frames": 4547,
+  "gops": 1137,
+  "tail_actual_frames": 3,
+  "output_fps": 58.84770490643441,
+  "duration_seconds_cfr": 77.26724444444444,
+  "groups": {
+    "trained": {
+      "frames": 32,
+      "gops": 8,
+      "mse": 0.0005128799508446248,
+      "psnr_db": 32.89984277747919
+    },
+    "other": {
+      "frames": 4515,
+      "gops": 1129,
+      "mse": 0.04329548757507655,
+      "psnr_db": 13.635573651562328
+    },
+    "all": {
+      "frames": 4547,
+      "gops": 1137,
+      "mse": 0.04299440038704589,
+      "psnr_db": 13.665881034754044
+    }
+  },
+  "trained_metrics_reproduced": true,
+  "video_readback_verified": true,
+  "checkpoint_unchanged": true,
+  "optimizer_updates": 0,
+  "elapsed_seconds": 140.53016210533679
+}

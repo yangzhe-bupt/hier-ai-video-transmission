@@ -1,0 +1,8 @@
+{
+  "unchanged_other_initial_weights": true,
+  "unchanged_rng": true,
+  "conv2d_equivalent_without_added_gelu": true,
+  "common_gradients_finite": true,
+  "legacy_parameters": 6974094,
+  "fig7_parameters": 6455694
+}

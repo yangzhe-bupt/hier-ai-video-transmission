@@ -1,0 +1,25 @@
+{
+  "checkpoint": "<CONQUERING_ROOT>/outputs/step15_video_fit/20261120_183538_473891/epoch_0005.pt",
+  "checkpoint_sha256": "2b99f7fe7baec38d664fdc26ba7f4ebedc96faf8c3f6ad8f10f8e0932b6ed36a",
+  "checkpoint_epoch": 5,
+  "video": "data/videos/01.mp4",
+  "video_sha256": "37b7ee8559e55360dae2562819e8e4ee14bb022a8bba61a8e7ecef8be72af9ca",
+  "fps": 58.84770490643441,
+  "source_metadata_frames": 4547,
+  "output_sizes": [
+    [
+      256,
+      192
+    ],
+    [
+      512,
+      216
+    ]
+  ],
+  "device": "cuda",
+  "torch": "2.0.1+cu117",
+  "max_gops": 0,
+  "tail": "repeat final frame, evaluate/export actual frames only",
+  "optimizer_updates": 0,
+  "metrics": "float predictions before MP4 encoding; PSNR from pooled RGB MSE"
+}

@@ -1,0 +1,51 @@
+{
+  "video": "data/videos/01.mp4",
+  "gops": 8,
+  "epochs": 5000,
+  "resume": "outputs/step15_video_fit/20261120_145932_108417/last.pt",
+  "eval_every": 250,
+  "device": "cuda",
+  "seed": 42,
+  "output_root": "<CONQUERING_ROOT>/outputs/step15_video_fit",
+  "video_sha256": "37b7ee8559e55360dae2562819e8e4ee14bb022a8bba61a8e7ecef8be72af9ca",
+  "fps": 58.84770490643441,
+  "decoded_frames": 4547,
+  "start_epoch": 500,
+  "start_updates": 4000,
+  "parent_checkpoint_sha256": "103a27f8abefaa7ad83f9ad7418f1a9ea266bbdc04fdb7c0c9504c5d8ce702f9",
+  "gop_starts": [
+    0,
+    648,
+    1296,
+    1944,
+    2592,
+    3240,
+    3888,
+    4540
+  ],
+  "unused_tail_frames": 3,
+  "preprocessing": {
+    "original_hw": [
+      720,
+      960
+    ],
+    "resized_hw": [
+      192,
+      256
+    ],
+    "padding_tblr": [
+      32,
+      32,
+      0,
+      0
+    ]
+  },
+  "model_variant": "common_fig7",
+  "lr": 0.0001,
+  "aux_weight": 0.01,
+  "batch_size": 1,
+  "expected_updates": 40000,
+  "purpose": "same-video training-set fit; no held-out evaluation",
+  "quantization_bits": 3,
+  "note": "sampling/scene cuts and duplicate animation frames retained; not all-video fit until gops=0"
+}

@@ -1,0 +1,112 @@
+[
+  {
+    "epoch": 0,
+    "updates": 0,
+    "mean_mse": 0.04299440039250989,
+    "pooled_psnr_db": 13.665881034202116,
+    "worst_gop_psnr_db": 7.977920662393374,
+    "elapsed_seconds": 105.13030594959855,
+    "initialization_gops_psnr_db": 32.89984277445138,
+    "new_gops_psnr_db": 13.635573651010608
+  },
+  {
+    "epoch": 1,
+    "updates": 1137,
+    "mean_mse": 0.013479925613430062,
+    "pooled_psnr_db": 18.703125043708763,
+    "worst_gop_psnr_db": 12.194776446201544,
+    "elapsed_seconds": 421.3204670101404,
+    "initialization_gops_psnr_db": 23.380532052837584,
+    "new_gops_psnr_db": 18.682875974685697
+  },
+  {
+    "epoch": 2,
+    "updates": 2274,
+    "mean_mse": 0.010846328503844576,
+    "pooled_psnr_db": 19.647172461806235,
+    "worst_gop_psnr_db": 9.474336004818763,
+    "elapsed_seconds": 883.7466133479029,
+    "initialization_gops_psnr_db": 22.403277207254767,
+    "new_gops_psnr_db": 19.6327338957601
+  },
+  {
+    "epoch": 3,
+    "updates": 3411,
+    "mean_mse": 0.011981008121301795,
+    "pooled_psnr_db": 19.21506637447703,
+    "worst_gop_psnr_db": 10.772001623094255,
+    "elapsed_seconds": 1200.8999642226845,
+    "initialization_gops_psnr_db": 20.556856466024833,
+    "new_gops_psnr_db": 19.20689294132319
+  },
+  {
+    "epoch": 4,
+    "updates": 4548,
+    "mean_mse": 0.009323080651548512,
+    "pooled_psnr_db": 20.30440558794176,
+    "worst_gop_psnr_db": 9.348757199065531,
+    "elapsed_seconds": 1515.6040363740176,
+    "initialization_gops_psnr_db": 22.651901748303143,
+    "new_gops_psnr_db": 20.29157180453648
+  },
+  {
+    "epoch": 5,
+    "updates": 5685,
+    "mean_mse": 0.007853016566719892,
+    "pooled_psnr_db": 21.049634863592853,
+    "worst_gop_psnr_db": 15.659162471498782,
+    "elapsed_seconds": 1827.1358472816646,
+    "initialization_gops_psnr_db": 23.610253282470033,
+    "new_gops_psnr_db": 21.035945161110604
+  },
+  {
+    "epoch": 6,
+    "updates": 6822,
+    "mean_mse": 0.00759689643526059,
+    "pooled_psnr_db": 21.193637940776714,
+    "worst_gop_psnr_db": 15.033136326585447,
+    "elapsed_seconds": 2289.985455410555,
+    "initialization_gops_psnr_db": 23.475818475270152,
+    "new_gops_psnr_db": 21.181075026642894
+  },
+  {
+    "epoch": 7,
+    "updates": 7959,
+    "mean_mse": 0.006992523718160055,
+    "pooled_psnr_db": 21.553660518568908,
+    "worst_gop_psnr_db": 12.412923958871565,
+    "elapsed_seconds": 2610.341995632276,
+    "initialization_gops_psnr_db": 23.3020458515514,
+    "new_gops_psnr_db": 21.543471569559994
+  },
+  {
+    "epoch": 8,
+    "updates": 9096,
+    "mean_mse": 0.006675969631918478,
+    "pooled_psnr_db": 21.754856475350657,
+    "worst_gop_psnr_db": 13.364240485951655,
+    "elapsed_seconds": 2927.3355237152427,
+    "initialization_gops_psnr_db": 23.555210750742287,
+    "new_gops_psnr_db": 21.744423312313323
+  },
+  {
+    "epoch": 9,
+    "updates": 10233,
+    "mean_mse": 0.007424546877274132,
+    "pooled_psnr_db": 21.293300463480413,
+    "worst_gop_psnr_db": 14.641158347066503,
+    "elapsed_seconds": 3244.5450588800013,
+    "initialization_gops_psnr_db": 21.526918619304006,
+    "new_gops_psnr_db": 21.2916887431671
+  },
+  {
+    "epoch": 10,
+    "updates": 11370,
+    "mean_mse": 0.006050699659132556,
+    "pooled_psnr_db": 22.18194403772022,
+    "worst_gop_psnr_db": 16.658753672239843,
+    "elapsed_seconds": 3556.7361466083676,
+    "initialization_gops_psnr_db": 23.78454206654898,
+    "new_gops_psnr_db": 22.172456058507088
+  }
+]

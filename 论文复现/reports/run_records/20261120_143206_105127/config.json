@@ -1,0 +1,54 @@
+{
+  "video": "data/videos/01.mp4",
+  "start_frame": 2273,
+  "device": "cuda",
+  "steps": 5000,
+  "resume": null,
+  "model_variant": "common_fig7",
+  "reference_gop": "outputs/step14_spatial_probe/20261120_141717_372253/input_gop.pt",
+  "eval_every": 500,
+  "lr": 0.0001,
+  "aux_weight": 0.01,
+  "seed": 42,
+  "output_root": "<CONQUERING_ROOT>/outputs/step12_runs",
+  "experiment": "single_training_GOP_overfit",
+  "packet_loss": 0,
+  "preprocessing": {
+    "original_hw": [
+      720,
+      960
+    ],
+    "resized_hw": [
+      192,
+      256
+    ],
+    "padding_tblr": [
+      32,
+      32,
+      0,
+      0
+    ]
+  },
+  "valid_ratio": 0.75,
+  "video_sha256": "37b7ee8559e55360dae2562819e8e4ee14bb022a8bba61a8e7ecef8be72af9ca",
+  "optimizer": "Adam",
+  "detail_region": "lower half of valid image, same as spatial probe",
+  "start_step": 0,
+  "parent_checkpoint_sha256": null,
+  "gradient_clip_max_norm": 1.0,
+  "quantization_bits": 3,
+  "quantization_range": [
+    -1,
+    1
+  ],
+  "experts": 4,
+  "top_k": 2,
+  "moe_counts": [
+    4,
+    1,
+    1,
+    4
+  ],
+  "parameters": 6455694,
+  "metric": "MSE over all valid RGB pixels in the same training GOP; PSNR peak=1"
+}

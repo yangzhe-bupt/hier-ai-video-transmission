@@ -1,0 +1,32 @@
+{
+  "data_dir": "data/multi_gop/20261119_225658_378351",
+  "device": "cuda",
+  "epochs": 30,
+  "resume": null,
+  "batch_size": 1,
+  "lr": 0.0001,
+  "aux_weight": 0.01,
+  "seed": 42,
+  "smoke": false,
+  "model_variant": "common_fig7",
+  "output_root": "<CONQUERING_ROOT>/outputs/step12_multi_runs",
+  "initialization": "random",
+  "train_gops": 106,
+  "val_gops": 22,
+  "start_epoch": 0,
+  "start_updates": 0,
+  "parent_checkpoint_sha256": null,
+  "packet_loss": 0,
+  "gradient_clip_max_norm": 1.0,
+  "quantization_bits": 3,
+  "variant_initialization": "matched legacy effective center weights; unchanged global RNG",
+  "quantization_range": [
+    -1,
+    1
+  ],
+  "experts": 4,
+  "top_k": 2,
+  "parameters": 6455694,
+  "manifest_sha256": "9893cc94f1701135d571b93be2f8fa7336ca625cb72cead910231a75a3a291cf",
+  "metric": "MSE weighted by valid RGB pixels; PSNR from pooled MSE, peak=1"
+}

@@ -1,0 +1,53 @@
+{
+  "device": "cpu",
+  "torch": "2.6.0+cu124",
+  "mode": "train_noise_backward",
+  "moe_counts": [
+    4,
+    1,
+    1,
+    4
+  ],
+  "parameters": 6974094,
+  "input_shape": [
+    1,
+    4,
+    3,
+    256,
+    256
+  ],
+  "output_shape": [
+    1,
+    4,
+    3,
+    256,
+    256
+  ],
+  "valid_mse": 0.039817098528146744,
+  "auxiliary_loss": 1.2339547872543335,
+  "total_loss": 0.05215664580464363,
+  "saturation": {
+    "common": 0.0,
+    "individual": 0.1052517369389534
+  },
+  "elapsed_seconds": 2.486554100003559,
+  "preprocessing": {
+    "original_hw": [
+      1088,
+      612
+    ],
+    "resized_hw": [
+      256,
+      144
+    ],
+    "padding_tblr": [
+      0,
+      0,
+      56,
+      56
+    ]
+  },
+  "optimizer_updates": 0,
+  "cuda_peak_allocated_mib": null,
+  "cuda_peak_reserved_mib": null
+}
