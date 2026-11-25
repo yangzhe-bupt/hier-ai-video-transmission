@@ -1,0 +1,23 @@
+研究依据
+1. Video Swin Transformer 官方代码
+https://github.com/SwinTransformer/Video-Swin-Transformer/blob/master/mmaction/models/backbones/swin_transformer.py
+用于核对3D窗口与层次结构，是视频识别backbone，不直接提供本项目的重建解码器。
+原论文3D Swin+MoE不等于直接替换成官方识别网络即可获得视频编解码性能。
+
+2. SwinIR: Image Restoration Using Swin Transformer
+https://arxiv.org/abs/2108.10257
+借鉴残差Swin块组的重建思路。Step37将该思路扩展到已有3D窗口块，阶段内加入3x3卷积和组残差；卷积零初始化是本项目为优化稳定性选择，不是SwinIR原实现声明。
+残差连接仅在同一编码阶段/解码阶段内部，接收端不能读取未传输的发送端高分辨率特征。
+
+3. SwinV2
+https://arxiv.org/abs/2111.09883
+残差后归一化及余弦注意力可改善大模型训练稳定性，但当前未发现足以优先替换全部归一化/注意力的数值异常，所以先不混入本轮。
+
+本轮候选
+A. 原普通3D Swin时空模型，瓶颈[4,120,8,8]。
+B. 相同尺寸通道和窗口，加入组内重建残差，瓶颈元素数不变。
+C. 少一次下采样并缩减通道，瓶颈[4,30,16,16]，元素数仍30720；检验空间分辨率与通道的分配，而不是暗增传输量。
+C是研究假设，不是从引用论文照搬的已证明设计。保持元素数量不等于实际码率相同；本轮无量化/MoE，不与原完整模型CBR混比。
+所有组固定相同8个GOP、随机种子、batch4和更新预算，记录参数量、耗时和收敛曲线。
+Step33中断的末组先从600步补完至2000步；前三组不重训。
+Step37只准备并执行无更新检查，未经明确告知不启动新一轮结构训练。

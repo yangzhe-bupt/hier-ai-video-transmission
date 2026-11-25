@@ -1,5 +1,7 @@
 # Conquering 论文复现
 
+> **2026-11-25 当前主线更新：** 残差组时空编解码 + 双分支 + MoE + 3-bit量化，已进入REDS多视频Stage I训练。请优先阅读[当前训练入口](docs/当前训练入口.md)、[模型交接说明](docs/模型代码交接说明_20261124.txt)和[数据集下载](docs/REDS数据集.md)。下文为历史单视频与Stage II入口，当前残差多视频模型尚未完成有损信道与工程指标验收。数据、权重及本次训练输出不上传。
+
 基于 Teng 等的 *Conquering High Packet-Loss Erasure: MoE Swin Transformer-Based Video Semantic Communication* 搭建 MSTVSC 学习原型。已完成无丢包重建训练、模拟整包擦除下的抗丢包接收端训练，以及整段视频重建和导出。当前用 common_fig7 连接阶段 II。真实字节包与自适应反馈是后续集成项。
 
 ## 目录

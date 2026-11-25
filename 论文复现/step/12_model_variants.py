@@ -75,15 +75,102 @@ class Stage6BlockPair(nn.Module):
         return self.second(self.first(features))
 
 
+class SpatialOnlyDiagnostic(nn.Module):
+    """逐帧空间编解码，返回完整模型兼容的三项接口。
+
+    零辅助项/裁剪值仅为日志接口占位，不代表实际存在MoE或量化。
+    state_dict布局与Step14空间诊断一致。
+    """
+    def __init__(self):
+        super().__init__()
+        self.encoder=base.step06.SpatialEncoder()
+        self.decoder=base.step06.SpatialDecoder()
+
+    def forward(self,video):
+        b,t,c,h,w=video.shape
+        result=self.decoder(self.encoder(video.reshape(b*t,c,h,w))).reshape(b,t,c,h,w)
+        return result,result.new_zeros(()),{'common':0.,'individual':0.}
+
+
+class SpatiotemporalOnlyDiagnostic(nn.Module):
+    """空间→时空编码→时空解码→空间解码，无分解、量化或通道。
+
+    先构造两个空间模块，使相同种子下其初始权重与spatial_only一致。
+    时空前馈仍使用MoE，辅助损失按8块平均。此诊断同时增加降采样、
+    注意力和MoE，不能只凭差值断定某一个算子有问题。
+    """
+    def __init__(self):
+        super().__init__()
+        self.spatial_encoder=base.step06.SpatialEncoder()
+        self.spatial_decoder=base.step06.SpatialDecoder()
+        self.temporal_encoder=base.step07.SpatiotemporalEncoder()
+        self.temporal_decoder=base.step07.SpatiotemporalDecoder()
+        counts=[base.step11.replace_mlp_with_moe(m,num_experts=4,top_k=2)
+                for m in (self.temporal_encoder,self.temporal_decoder)]
+        if counts!=[4,4]:raise ValueError('时空MoE块数错误')
+
+    def forward(self,video):
+        if video.ndim!=5 or video.shape[1:3]!=(4,3):raise ValueError('输入须为[B,4,3,H,W]')
+        b,t,c,h,w=video.shape
+        spatial=self.spatial_encoder(video.reshape(b*t,c,h,w))
+        _,channels,sh,sw=spatial.shape
+        temporal,encoder_aux=self.temporal_encoder(spatial.reshape(b,t,channels,sh,sw),return_aux=True)
+        decoded,decoder_aux=self.temporal_decoder(temporal,return_aux=True)
+        result=self.spatial_decoder(decoded.reshape(b*t,channels,sh,sw)).reshape(b,t,c,h,w)
+        return result,(encoder_aux+decoder_aux)/2,{'common':0.,'individual':0.}
+
+
 def build_model(variant="legacy"):
-    if variant not in ("legacy", "common_fig7", "common_fig7_stage6_pair"):
+    if variant == 'spatiotemporal_only':
+        return SpatiotemporalOnlyDiagnostic()
+    if variant == 'spatial_only':
+        return SpatialOnlyDiagnostic()
+    if variant not in ("legacy", "common_fig7", "common_fig7_stage6_pair", "branches_float"):
         raise ValueError(f"未知模型版本：{variant}")
     model = base.Stage1Model()
-    if variant in ("common_fig7", "common_fig7_stage6_pair"):
+    if variant in ("common_fig7", "common_fig7_stage6_pair", "branches_float"):
         model.common_extractor = Figure7CommonExtractor(model.common_extractor)
+    if variant == 'branches_float':
+        # 显式替换整个量化器：无裁剪、无训练噪声、无舍入。
+        model.common_quantizer=nn.Identity()
+        model.individual_quantizer=nn.Identity()
     if variant == "common_fig7_stage6_pair":
         model.individual_extractor.block = Stage6BlockPair(model.individual_extractor.block)
         model.individual_upsample.block = Stage6BlockPair(model.individual_upsample.block)
         # Stage1Model.forward会按此数量加权各模块的辅助损失均值。
         model.moe_counts = (4,2,2,4)
     return model
+
+
+def transfer_float_branches_to_quantized(target, source_state):
+    """保留全部已训练权重，只重新启用原固定范围量化器。
+
+    Identity与当前UniformQuantizer都没有参数/缓冲区，故state_dict必须
+    完整严格匹配。量化范围不从数据估计，也不增加传输侧信息。
+    训练仍使用原裁剪加噪近似，评估使用真实舍入；不恢复旧Adam。
+    """
+    quantizers=(target.common_quantizer,target.individual_quantizer)
+    for q in quantizers:
+        if not isinstance(q,base.step09.UniformQuantizer):
+            raise ValueError('目标必须使用UniformQuantizer')
+        if (q.bits,q.min_value,q.max_value)!=(3,-1.,1.) or q.state_dict():
+            raise ValueError('目标须为无参数的原3-bit [-1,1]量化器')
+    target.load_state_dict(source_state,strict=True)
+    return dict(transferred_tensors=len(source_state),new_parameter_tensors=0,
+                operation='branches_float to common_fig7; all weights preserved',
+                quantization_bits=3,quantization_range=[-1.,1.],
+                training='clamp plus uniform noise',evaluation='clamp and round',
+                optimizer='new Adam; not restored')
+
+
+def transfer_spatiotemporal_codec(target, source_state):
+    """只迁移四个已有编解码模块，严格核对所有新增/未知参数名称。"""
+    prefixes=('spatial_encoder.','spatial_decoder.','temporal_encoder.','temporal_decoder.')
+    if any(not key.startswith(prefixes) for key in source_state):
+        raise ValueError('迁移源应仅包含四个编解码模块')
+    loaded=target.load_state_dict(source_state,strict=False)
+    new_prefixes=('common_extractor.','individual_extractor.','individual_upsample.')
+    if loaded.unexpected_keys or any(not key.startswith(new_prefixes) for key in loaded.missing_keys):
+        raise ValueError(f'迁移缺失或多余参数异常：{loaded}')
+    return dict(transferred_tensors=len(source_state),new_parameter_tensors=len(loaded.missing_keys),
+                transferred_modules=[p[:-1] for p in prefixes],new_modules=[p[:-1] for p in new_prefixes])

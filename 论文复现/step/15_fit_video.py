@@ -31,9 +31,12 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--video',type=Path,required=True)
     p.add_argument('--gops',type=int,default=8,help='0表示全部完整GOP')
+    p.add_argument('--model-variant',choices=('common_fig7','spatial_only','spatiotemporal_only','branches_float'),default='common_fig7')
     p.add_argument('--epochs',type=int,default=500,help='累计目标轮数')
     p.add_argument('--resume',type=Path,help='本脚本生成的last.pt；恢复Adam、随机状态和累计轮数')
     p.add_argument('--init-checkpoint',type=Path,help='仅加载模型权重；允许扩大GOP集合，Adam和轮数重新开始')
+    p.add_argument('--transfer-codec',action='store_true',help='显式从spatiotemporal_only迁移四个模块到branches_float')
+    p.add_argument('--enable-quantization',action='store_true',help='仅初始化：branches_float权重严格迁移到common_fig7，启用原3-bit量化，新建Adam')
     p.add_argument('--export-epochs',type=int,nargs='*',default=[],help='指定轮末自动导出整段视频，例如1 5 10')
     p.add_argument('--eval-every',type=int,default=50)
     p.add_argument('--device',choices=('cpu','cuda'),default='cpu')
@@ -41,10 +44,17 @@ def main():
     p.add_argument('--lr',type=float,default=1e-4)
     p.add_argument('--allow-lr-change',action='store_true',help='显式允许续训改变学习率，保留Adam动量')
     p.add_argument('--quality-threshold',type=float,default=27.,help='当前视频暂定逐GOP验收线，非通用标准')
+    p.add_argument('--accumulation-steps',type=int,default=1,help='平均若干GOP的梯度后做一次Adam更新')
+    p.add_argument('--allow-accumulation-change',action='store_true',help='明确允许恢复时改变累积数，保留Adam状态')
     p.add_argument('--output-root',type=Path,default=ROOT/'outputs/step15_video_fit')
     args=p.parse_args()
     if args.gops<0 or args.epochs<1 or args.eval_every<1:p.error('参数范围错误')
+    if args.accumulation_steps<1:p.error('梯度累积数必须为正')
     if args.resume and args.init_checkpoint:p.error('resume和init-checkpoint互斥')
+    if args.transfer_codec and (not args.init_checkpoint or args.model_variant!='branches_float'):
+        p.error('transfer-codec需要init-checkpoint和branches_float')
+    if args.enable_quantization and (not args.init_checkpoint or args.model_variant!='common_fig7' or args.transfer_codec):
+        p.error('enable-quantization需要init-checkpoint和common_fig7，不能与transfer-codec一起使用')
     if not math.isfinite(args.lr) or args.lr<=0 or not math.isfinite(args.quality_threshold):p.error('学习率或验收阈值不合法')
     torch.set_num_threads(2);torch.manual_seed(args.seed);random.seed(args.seed);np.random.seed(args.seed)
     torch.backends.cudnn.benchmark=False
@@ -93,13 +103,22 @@ def main():
         valid=mask.expand(1,4,1,256,256).clone()
         valid[:,actual_frames[start]:]=False
         return valid
-    model=variants.build_model('common_fig7').to(args.device)
+    model=variants.build_model(args.model_variant).to(args.device)
+    aux_weight=0. if args.model_variant=='spatial_only' else .01
     initialization_starts=[]
+    transfer_report=None
     if args.init_checkpoint:
         initial=torch.load(args.init_checkpoint,map_location='cpu',weights_only=False)
-        if initial['config']['model_variant']!='common_fig7':p.error('初始化模型结构不同')
         if initial['config']['video_sha256']!=utils.sha256(args.video):p.error('初始化权重不是当前视频实验')
-        model.load_state_dict(initial['model'],strict=True)
+        if args.enable_quantization:
+            if initial['config']['model_variant']!='branches_float':p.error('启用量化的迁移源须为branches_float')
+            transfer_report=variants.transfer_float_branches_to_quantized(model,initial['model'])
+        elif args.transfer_codec:
+            if initial['config']['model_variant']!='spatiotemporal_only':p.error('迁移源须为spatiotemporal_only')
+            transfer_report=variants.transfer_spatiotemporal_codec(model,initial['model'])
+        else:
+            if initial['config']['model_variant']!=args.model_variant:p.error('初始化模型结构不同')
+            model.load_state_dict(initial['model'],strict=True)
         initialization_starts=initial['config']['gop_starts']
         del initial
     optimizer=torch.optim.Adam(model.parameters(),lr=args.lr)
@@ -110,7 +129,7 @@ def main():
         old=saved['config']
         initialization_starts=old.get('initialization_starts',[])
         for key,value in (('seed',args.seed),('video_sha256',utils.sha256(args.video)),
-                          ('gop_starts',starts),('model_variant','common_fig7')):
+                          ('gop_starts',starts),('model_variant',args.model_variant)):
             if old[key]!=value:p.error(f'续训配置不一致：{key}')
         if not torch.equal(torch.load(args.resume.parent/'valid_mask.pt',map_location='cpu',weights_only=False),mask.cpu()):
             p.error('有效区域mask不同')
@@ -119,7 +138,11 @@ def main():
                 p.error(f'第{start}帧GOP缓存与原实验不同')
         start_epoch=int(saved['epoch']);updates=int(saved['updates'])
         if args.epochs<=start_epoch:p.error('累计目标epochs必须大于检查点轮数')
-        if updates!=start_epoch*len(starts):p.error('检查点不是完整轮次')
+        previous_accumulation=old.get('accumulation_steps',1)
+        if previous_accumulation!=args.accumulation_steps and not args.allow_accumulation_change:
+            p.error('梯度累积数改变需添加--allow-accumulation-change')
+        expected_old=old.get('start_updates',0)+(start_epoch-old.get('start_epoch',0))*math.ceil(len(starts)/previous_accumulation)
+        if updates!=expected_old:p.error('检查点更新次数与完整轮次不一致')
         model.load_state_dict(saved['model'],strict=True);optimizer.load_state_dict(saved['optimizer'])
         previous_lr=float(optimizer.param_groups[0]['lr'])
         if previous_lr!=args.lr and not args.allow_lr_change:
@@ -140,12 +163,19 @@ def main():
         init_checkpoint_sha256=utils.sha256(args.init_checkpoint) if args.init_checkpoint else None,
         start_epoch=start_epoch,start_updates=start_updates,
         parent_checkpoint_sha256=utils.sha256(args.resume) if args.resume else None,
-        gop_starts=starts,unused_tail_frames=0 if args.gops==0 else count%4,preprocessing=info,model_variant='common_fig7',
+        gop_starts=starts,unused_tail_frames=0 if args.gops==0 else count%4,preprocessing=info,model_variant=args.model_variant,
         lr=args.lr,previous_lr=previous_lr,lr_changed=previous_lr is not None and previous_lr!=args.lr,
-        aux_weight=.01,batch_size=1,expected_updates=len(starts)*args.epochs,
-        purpose='same-video training-set fit; no held-out evaluation',quantization_bits=3,
+        aux_weight=aux_weight,batch_size=1,effective_gops_per_update=args.accumulation_steps,
+        updates_per_epoch=math.ceil(len(starts)/args.accumulation_steps),
+        expected_updates=updates+(args.epochs-start_epoch)*math.ceil(len(starts)/args.accumulation_steps),
+        purpose='same-video training-set fit; no held-out evaluation',
+        quantization_bits=3 if args.model_variant=='common_fig7' else None,
+        parameters=sum(q.numel() for q in model.parameters()),
+        log_placeholder_fields=(['eval_aux'] if args.model_variant=='spatial_only' else [])+
+            (['eval_common_clip','eval_individual_clip'] if args.model_variant in ('spatial_only','spatiotemporal_only') else []),
         note='sampling/scene cuts and duplicate animation frames retained; not all-video fit until gops=0')
     utils.write_json(out/'config.json',config)
+    if transfer_report:utils.write_json(out/'weight_transfer.json',transfer_report)
     if args.resume:
         parent=out/'parent_records';parent.mkdir()
         for name in ('config.json','result.json','history.json','per_gop.csv','updates.csv','summary.txt'):
@@ -171,8 +201,11 @@ def main():
         temporary.replace(out/name)
     print(f'实验目录：{out}；GOP数={len(starts)}；更新数={config["expected_updates"]}',flush=True)
     print(f'固定起始帧：{starts}',flush=True)
-    print(f'累计轮数：{start_epoch} → {args.epochs}；起点更新={start_updates}；新增更新={(args.epochs-start_epoch)*len(starts)}',flush=True)
+    print(f'累计轮数：{start_epoch} → {args.epochs}；起点更新={start_updates}；新增更新={config["expected_updates"]-start_updates}',flush=True)
     print(f'学习率：{previous_lr} → {args.lr}；验收阈值={args.quality_threshold} dB',flush=True)
+    print(f'模型={args.model_variant}，参数量={config["parameters"]}，辅助损失权重={aux_weight}',flush=True)
+    if transfer_report:print(f'权重迁移：{transfer_report}',flush=True)
+    print(f'梯度累积：{args.accumulation_steps}个GOP；每轮Adam更新={config["updates_per_epoch"]}',flush=True)
     with (out/'updates.csv').open('w',newline='',encoding='utf-8') as stream, (out/'per_gop.csv').open('w',newline='',encoding='utf-8') as detail:
         writer=csv.DictWriter(stream,fieldnames=['epoch','update','start_frame','mse','aux','total','grad_norm']);writer.writeheader()
         dw=None
@@ -180,15 +213,25 @@ def main():
             if epoch>start_epoch:
                 order=starts.copy();random.shuffle(order)
                 model.train()
-                for start in order:
-                    video=load(start);optimizer.zero_grad(set_to_none=True)
-                    pred,aux,_=model(video);mse=base.masked_mse(pred,video,sample_mask(start));loss=mse+.01*aux
-                    if not torch.isfinite(loss):raise RuntimeError('非有限loss')
-                    loss.backward();norm=torch.nn.utils.clip_grad_norm_(model.parameters(),1.,error_if_nonfinite=True)
+                for group_start in range(0,len(order),args.accumulation_steps):
+                    group=order[group_start:group_start+args.accumulation_steps]
+                    optimizer.zero_grad(set_to_none=True)
+                    group_logs=[]
+                    for start in group:
+                        video=load(start)
+                        pred,aux,_=model(video);mse=base.masked_mse(pred,video,sample_mask(start));loss=mse+aux_weight*aux
+                        if not torch.isfinite(loss):raise RuntimeError('非有限loss')
+                        # 末组可能不足4个，按实际组大小平均，避免末组梯度偏小。
+                        # 每个GOP的MoE统计保持原定义，不等价于跨4GOP联合统计负载。
+                        (loss/len(group)).backward()
+                        group_logs.append(dict(epoch=epoch,start_frame=start,mse=mse.item(),aux=aux.item(),total=loss.item()))
+                        del pred,aux,mse,loss
+                    # 累积完成后只裁剪一次、只更新一次Adam。
+                    norm=torch.nn.utils.clip_grad_norm_(model.parameters(),1.,error_if_nonfinite=True)
                     optimizer.step();updates+=1
-                    writer.writerow(dict(epoch=epoch,update=updates,start_frame=start,mse=mse.item(),aux=aux.item(),total=loss.item(),grad_norm=norm.item()));stream.flush()
+                    for entry in group_logs:writer.writerow(dict(**entry,update=updates,grad_norm=norm.item()))
+                    stream.flush()
                     if updates%100==0:print(f'epoch={epoch}/{args.epochs} updates={updates}',flush=True)
-                    del pred,aux,mse,loss
                 if epoch%10==0:print(f'epoch={epoch}/{args.epochs} updates={updates}',flush=True)
             if epoch!=start_epoch and epoch%args.eval_every!=0 and epoch!=args.epochs and epoch not in args.export_epochs:continue
             metrics=[]
@@ -237,9 +280,14 @@ def main():
                 subprocess.run(command,check=True)
     (out/'summary.txt').write_text('单视频训练集拟合诊断，非泛化测试。默认8个GOP，不代表整段已重建。\n'
         '每轮每样本访问一次；记录平均和最差片段指标，帧号预先固定。\n'
-        f'量化、模型和损失保持common_fig7学习配置。本次起点{start_epoch}轮，新增{updates-start_updates}次更新。\n'
+        f'模型版本={args.model_variant}。本次起点{start_epoch}轮，新增{updates-start_updates}次更新。\n'
+        'spatial_only只有逐帧空间编解码，无时空压缩/双分支/MoE/量化，辅助项和裁剪值为0占位；不是同码率比较。\n'
+        'spatiotemporal_only增加两级时空编解码与8个MoE块，损失为MSE+0.01辅助损失，无分支分解和量化；裁剪统计为0占位。\n'
+        'branches_float加入公共/个体压缩和上采样，无任何量化或裁剪。日志超范围比例仅诊断相对[-1,1]的分布，不表示执行了裁剪。\n'
+        'transfer-codec仅迁移四个编解码模块，新分支随机初始化，新Adam，所有模块联合训练；起点并非恒等于源模型。\n'
         '支持--resume恢复；--epochs指定累计目标。best与曲线范围为本次运行含起点，原记录在parent_records。\n'
         f'学习率由{previous_lr}变为{args.lr}；保留Adam状态。验收阈值{args.quality_threshold} dB仅用于当前内容，达标率不代替播放验收。\n'
+        f'每{args.accumulation_steps}个GOP梯度平均后更新一次，末组按实际数量平均；MoE负载损失仍逐GOP计算。每轮样本访问次数不变，Adam更新次数改变。\n'
         'init-checkpoint仅恢复模型，新Adam；与同样本集合resume不同。全量模式包含尾部GOP，重复补齐帧不参与损失。\n'
         'export-epochs调用整段重建脚本并保存对应轮权重。实际导出目录见video_exports。\n',encoding='utf-8')
     print(f'训练记录保存完成：{out}')

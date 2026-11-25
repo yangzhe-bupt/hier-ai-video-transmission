@@ -1,5 +1,5 @@
 # 按系统和 CUDA 版本从 PyTorch 官方渠道选择 torch 构建。
 torch>=2.0,<3
 numpy>=1.24,<3
-opencv-python>=4.8,<5
+opencv-python>=4.8,<6
 matplotlib>=3.7,<4
