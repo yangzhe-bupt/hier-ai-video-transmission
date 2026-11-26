@@ -1,0 +1,98 @@
+相关论文调研与当前项目指标提升建议
+日期：2026年11月26日；仅依据论文/会议页面与作者代码，未采用二手宣传指标。
+当前目标：先定位多视频重建模糊，保留论文复现基线；最终工程目标另行验证。
+
+一、项目事实与筛选原则
+
+完整量化模型第53轮独立验证22.591dB；取消舍入但保留裁剪22.760dB，直接绕过量化器19.508dB。后两项是同权重推理扰动，不是重新训练的浮点性能。
+固定8GOP残差完整模型28.595dB不代表独立验证；仅空间模型保留更多标量，不能把它的高PSNR直接解释为同码率更优。
+正在运行的空间/完整浮点/完整量化三组多视频对照是下一步决策依据，当前不改其源码，也不抢占训练GPU。
+不承诺某篇论文的方法在当前任务上增加固定dB数；任务、数据、预算和训练方式不同。
+
+二、优先级P1：Soft then Hard（ICML 2021）
+论文：Soft then Hard: Rethinking the Quantization in Neural Image Compression
+https://proceedings.mlr.press/v139/guo21c.html
+https://proceedings.mlr.press/v139/guo21c/guo21c.pdf
+
+论文要点：先用加性均匀噪声学习编码表示，再固定编码器，以真实离散量化微调接收侧，缓解训练/测试量化不一致；还研究可变噪声尺度。
+本项目可借鉴的实验（本项目适配方案，不是论文原算法完整复现）：
+  选定当前量化模型检查点，固定空间/时空编码器、公共提取与个体压缩，保持量化器eval真实舍入，仅训练个体上采样和时空/空间解码器。
+  不加丢包、不加增强、不改码值范围，使用新Adam，标记为“真实量化接收端微调”，不与原Adam续训混淆。
+  对照：同起点/相同数据与更新数的原噪声训练或原检查点，验证PSNR与图像。
+限制：原文包含熵模型及率失真目标，本项目尚未具备，不能宣称整套复现；这也不等于把端到端噪声直接替换为STE。
+实施条件：若三组对照中浮点明显优于量化，优先考虑；若浮点自身也模糊，不能指望这一步补回全部细节。
+成本：低至中，无需新增大型骨干；收益待实验。
+
+三、优先级P1/P2：SwinIR（ICCV Workshops 2021）
+论文：SwinIR: Image Restoration Using Swin Transformer
+https://openaccess.thecvf.com/content/ICCV2021W/AIM/html/Liang_SwinIR_Image_Restoration_Using_Swin_Transformer_ICCVW_2021_paper.html
+作者代码：https://github.com/JingyunLiang/SwinIR
+
+论文要点：浅层提取、残差Swin组深层提取、图像重建的恢复框架。
+当前已借鉴组级残差；3D扩展及卷积零初始化属于本项目选择。
+下一步适配假设：保持传输特征不变，只提高接收端的局部细化能力，与当前解码器做同训练预算对照；可学习输出残差必须基于接收到的特征或接收端已有重建，不能跨通道偷接原图。
+限制：SwinIR是图像恢复，不是本项目的抗丢包编解码器；现有残差实验已做过，不能将再次叠加相同结构当作新证据。
+实施条件：完整浮点也弱于空间，且评估显示局部纹理恢复能力不足时，再检验更强解码/更少压缩等分解假设。
+
+四、优先级P2：BasicVSR++（CVPR 2022）
+论文：BasicVSR++: Improving Video Super-Resolution with Enhanced Propagation and Alignment
+https://openaccess.thecvf.com/content/CVPR2022/papers/Chan_BasicVSR_Improving_Video_Super-Resolution_With_Enhanced_Propagation_and_Alignment_CVPR_2022_paper.pdf
+https://arxiv.org/abs/2104.13371
+
+论文要点：二阶网格传播与光流引导可变形对齐，用于更好地聚合有运动的视频帧信息。
+本项目启发：当前4帧直接进入3D窗口，缺少显式对齐；公共提取前的运动差异可能削弱可共享表示，但尚无本项目证据证明。
+建议实验：先按运动强度分组检查错误；再考虑编码端的轻量GOP内对齐/融合候选，严格计入参数与耗时。
+若解码端需要光流或偏移，必须由已接收信息估计，或计入实际发送负载；不能使用仅编码端可见的原视频。
+限制：视频超分辨率/恢复不是视频压缩；原网络的计算、依赖和时序结构不能直接搬到8GB实时通信约束下，也不应保证论文增益可迁移。
+
+五、优先级P2：SRFormer（ICCV 2023）
+论文：SRFormer: Permuted Self-Attention for Single Image Super-Resolution
+https://openaccess.thecvf.com/content/ICCV2023/html/Zhou_SRFormer_Permuted_Self-Attention_for_Single_Image_Super-Resolution_ICCV_2023_paper.html
+作者代码：https://github.com/HVision-NKU/SRFormer
+
+论文要点：用置换自注意力探索更大窗口的恢复信息，同时控制计算负担。
+本项目启发：当前空间窗口为4×4，局部上下文范围值得对照；可先在逐帧空间模块中受控比较窗口范围，再决定是否移植注意力算子。
+限制：二维超分辨率算子不能直接替代3D Swin-MoE；扩大3D窗口会增加显存和计算，需要重新核对mask、移位、位置偏置与兼容性。
+这是后续候选，不与图7激活位置、量化训练和分支改动一次叠加。
+
+六、优先级P3：DCVC（NeurIPS 2021）
+论文：Deep Contextual Video Compression
+https://proceedings.neurips.cc/paper/2021/hash/96b250a90d3cf0868c83f8c965142d2a-Abstract.html
+作者代码：https://github.com/microsoft/DCVC/tree/main/DCVC-family/DCVC
+
+论文要点：以特征域上下文进行条件编码，超越仅用简单差分的预测残差编码思路。
+本项目启发（推论）：未来可检验“公共特征作为条件”的编码/解码，而不只使用F-C再相加。
+限制：这是改变当前双分支语义的大改动，不是修补一层；条件信息必须在接收端可获取。还要考虑参考状态与丢包误差传播。
+优先级靠后：先完成复现基线和当前对照，不直接换成DCVC或追逐其自有测试集数字。
+
+七、优先级P3：ELIC（CVPR 2022）
+论文：ELIC: Efficient Learned Image Compression With Unevenly Grouped Space-Channel Contextual Adaptive Coding
+https://openaccess.thecvf.com/content/CVPR2022/papers/He_ELIC_Efficient_Learned_Image_Compression_With_Unevenly_Grouped_Space-Channel_Contextual_CVPR_2022_paper.pdf
+https://arxiv.org/abs/2203.10886
+
+论文要点：非均匀通道分组与空间/通道上下文建模，面向学习式图像压缩效率。
+本项目启发：特征通道不必一视同仁，可先统计能量、饱和与量化误差，评估公共/个体预算是否分配合理。
+限制：当前是固定3-bit标量负载，没有熵模型/熵编码；仅加上下文或改变通道分组不会自动减少发送字节。要做真实率失真优化需完整定义R并统计码流与侧信息。
+因此先做预算核算，不把熵模型直接当作解决当前模糊的即插即用模块。
+
+八、评估原则：The Perception-Distortion Tradeoff（CVPR 2018）
+https://openaccess.thecvf.com/content_cvpr_2018/html/Blau_The_Perception-Distortion_Tradeoff_CVPR_2018_paper.html
+
+论文讨论感知质量与失真指标的权衡。本项目不应把“更锐利”“LPIPS更低”和“PSNR更高”混为一谈。
+应用建议：当前先保留MSE/PSNR基线，逐步补充LPIPS和时间表现，再单独评估感知损失/增强；不保证加GAN或感知损失能提高PSNR，也不能把生成细节当作忠实恢复。
+该理论不表示任意两个指标在所有训练阶段都必然一升一降，不能用来掩盖当前基础重建不足。
+
+九、结合已有实验的筛选
+
+已有LSQ与激活映射只在固定小训练集对照，LSQ有小幅收益，不能当作多视频已验证赢家。
+已有Swin残差扩展小训练集收益明显，独立多视频收益较小，说明“继续堆相同模块”不是当前首选。
+当前最先做的图7最后GELU位置对照属于原论文实现核对，和以上文献创新应分开。
+
+建议顺序：
+1. 完成当前三组多视频对照，使用同口径统一评估入口。
+2. 检验图7激活位置，独立训练对照，避免同时改变其他项。
+3. 若量化差距明显：真实量化、固定编码端的接收端微调。
+4. 若浮点仍弱：拆解时空压缩/分支/解码能力；再决定对齐或上下文候选。
+5. 真实打包与预算计数完善后，再考虑熵编码/条件编码等较大改造。
+
+所有建议均为待验证假设，不在本文承诺提升dB。后续比较记录独立验证、实际负载、参数、耗时、显存和视频时间稳定性；当前不修改运行中的训练。
